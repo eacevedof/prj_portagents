@@ -4,5 +4,5 @@
 ### Pasos:
 
 #### Frontend React
-- install -g expo-cli
+- npm install -g expo-cli
 

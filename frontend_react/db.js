@@ -2,7 +2,7 @@ import * as SQLite from 'expo-sqlite'
 import uuid from 'react-native-uuid'
 
 
-const db = SQLite.openDatabase("db.db")
+const db = SQLite.openDatabase("portagent.db")
 
 
 export const create_table = ()=>{

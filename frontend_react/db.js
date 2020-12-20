@@ -6,6 +6,10 @@ const db = SQLite.openDatabase("portagent.db")
 
 
 export const create_table = ()=>{
+  const sql1 = `
+  -- DROP TABLE IF EXISTS user;
+  `
+
   const sql = `
   CREATE TABLE IF NOT EXISTS user 
   (
@@ -19,9 +23,11 @@ export const create_table = ()=>{
 }
 
 export const insert = obj => {
-  const sql = `
-  INSERT INTO user (done, uuid) VALUES (?,?)
+  let sql = `
+  insert into user (done, value) values (?, ?)
   `
+  sql = "INSERT INTO user (done, uuid) VALUES (?,?)"
+
   const uuid = get_uuid()
   //const fn_insert = tx => tx.executeSql(sql, [ ])
 
@@ -41,7 +47,7 @@ export const insert = obj => {
   /**/ 
   db.transaction(
       tx => {
-        tx.executeSql("insert into user (done, value) values (?, ?)", [0,uuid]);
+        tx.executeSql(sql, [0,uuid]);
         tx.executeSql("select * from user", [], 
           (_, { rows }) => console.log("all",JSON.stringify(rows))
         );
@@ -57,12 +63,12 @@ export const selectall = obj => {
   SELECT * FROM user
   `
   //const fn_select = tx  => tx.executeSql(sql, [ ])
-  const fn_loader = (_, { rows }) => console.log(sql, JSON.stringify(rows))
+  //const fn_loader = (_, { rows }) => console.log(sql, JSON.stringify(rows))
   
   //db.transaction(fn_select, null, fn_loader)
-  db.transaction(tx => {
-    tx  => tx.executeSql(sql, [], (_, { rows }) => console.log(sql, JSON.stringify(rows)))
-  }, null, ()=>console.log("select"))
+  db.transaction(
+    tx  => tx.executeSql(sql, [], (_, { rows }) => console.table(rows))
+  , null, ()=>console.log("select"))
 }
 
 export const get_uuid = () => uuid.v1()

@@ -16,7 +16,7 @@ const Stack = createStackNavigator()
 function Screens(){
   create_table()
   insert()
-  //selectall()
+  selectall()
   //stack screen es cada pantalla
   //el orden de importa ya que son como capas de navegacion
   return (

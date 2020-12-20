@@ -48,7 +48,7 @@ export const selectall = obj => {
 
 export const remove = obj => {
   const sql = `
-  DELETE FROM user WHERE id LIKE '%?'
+  DELETE FROM user WHERE id = ?
   `
   const fn_delete = tx  => tx.executeSql(sql, [2])
   db.transaction(fn_delete, null, ()=>console.log("delete", sql))

@@ -27,13 +27,18 @@ export const insert = obj => {
 
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
   
+  /*
   db.transaction(tx => {
       tx => tx.executeSql(sql, [0, uuid])
+      tx.executeSql("select * from user", [], 
+        (_, { rows }) => console.log("all",JSON.stringify(rows))
+      )
     },
     null, ()=>console.log("inerted 1")
   )
+  */
   
-  
+  /**/ 
   db.transaction(
       tx => {
         tx.executeSql("insert into user (done, value) values (?, ?)", [0,uuid]);
@@ -44,17 +49,20 @@ export const insert = obj => {
       null,
       ()=>console.log("inserted ^^")
   )
-  
+  /**/
 }
 
 export const selectall = obj => {
   const sql = `
   SELECT * FROM user
   `
-  const fn_select = tx => tx.executeSql(sql, [ ])
+  //const fn_select = tx  => tx.executeSql(sql, [ ])
   const fn_loader = (_, { rows }) => console.log(sql, JSON.stringify(rows))
   
-  db.transaction(fn_select, null, fn_loader)
+  //db.transaction(fn_select, null, fn_loader)
+  db.transaction(tx => {
+    tx  => tx.executeSql(sql, [], (_, { rows }) => console.log(sql, JSON.stringify(rows)))
+  }, null, ()=>console.log("select"))
 }
 
 export const get_uuid = () => uuid.v1()

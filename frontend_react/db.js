@@ -27,12 +27,14 @@ export const insert = obj => {
   const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
   const date = (new Date()).toString()
   const uuid = get_uuid()
-  //const fn_insert = tx => tx.executeSql(sql, [ ])
-
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
   const arparam = [date, uuid, 0]
+  
+  const fn_insert = tx => tx.executeSql(sql,arparam)
+
   db.transaction(
-      tx => tx.executeSql(sql, arparam),
+      //tx => tx.executeSql(sql, arparam),
+      fn_insert,
       null,
       ()=>console.log("inserted",sql,arparam)
   )

@@ -32,26 +32,14 @@ export const insert = obj => {
   //const fn_insert = tx => tx.executeSql(sql, [ ])
 
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
-  
-  /*
-  db.transaction(tx => {
-      tx => tx.executeSql(sql, [0, uuid])
-      tx.executeSql("select * from user", [], 
-        (_, { rows }) => console.log("all",JSON.stringify(rows))
-      )
-    },
-    null, ()=>console.log("inerted 1")
-  )
-  */
-  
-  /**/ 
+  const arparam = [0, uuid]
   db.transaction(
       tx => {
-        tx.executeSql(sql, [0,uuid]);
+        tx.executeSql(sql, arparam);
       
       },
       null,
-      ()=>console.log("inserted ^^")
+      ()=>console.log("inserted",sql,arparam)
   )
   /**/
 }

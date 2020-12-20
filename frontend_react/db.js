@@ -55,6 +55,17 @@ export const remove = obj => {
   db.transaction(fn_delete, null, ()=>console.log("delete", sql, arparam))
 }
 
+export const update = obj => {
+  const sql = `
+  UPDATE user 
+  SET uuid = ?
+  WHERE id = ?
+  `
+  const arparam = ["xxx",3]
+  const fn_delete = tx  => tx.executeSql(sql, arparam)
+  db.transaction(fn_delete, null, ()=>console.log("delete", sql, arparam))
+}
+
 
 export const get_uuid = () => uuid.v1()
 

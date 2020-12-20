@@ -38,14 +38,11 @@ export const selectall = obj => {
   const sql = `
   SELECT * FROM user ORDER BY id DESC
   `
-  //const fn_select = tx  => tx.executeSql(sql, [ ])
-  const fn_loader = function(_, { rows }) {console.table(rows)}
-  
-  //db.transaction(fn_select, null, fn_loader)
-  db.transaction(
-    tx  => tx.executeSql(sql, [], fn_loader)
-    //tx  => tx.executeSql(sql, [], fn_loader)
-  , null, ()=>console.log("select"))
+
+  const fn_loader = (_, { rows }) => console.table(rows)
+  const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
+
+  db.transaction(fn_select, null, ()=>console.log("select"))
 }
 
 export const get_uuid = () => uuid.v1()

@@ -39,7 +39,8 @@ export const selectall = obj => {
   SELECT * FROM user ORDER BY id DESC
   `
 
-  const fn_loader = (_, { rows }) => console.table(rows)
+  // parametros func: (ojbect-transaction, object-resultset con rows y rowsAffected)
+  const fn_loader = (objtx, r) => console.table(r.rows)
   const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
 
   db.transaction(fn_select, null, ()=>console.log("select"))

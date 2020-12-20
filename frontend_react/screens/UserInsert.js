@@ -11,7 +11,7 @@ const UserInsert = ()=>{
         <TextInput placeholder="email" />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="password" />
+        <TextInput placeholder="phone" />
       </View>
       <View style={styles.inputgroup}>
         <Button title="Save User" />

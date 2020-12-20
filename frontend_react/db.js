@@ -43,8 +43,17 @@ export const selectall = obj => {
   const fn_loader = (objtx, r) => console.table(r.rows)
   const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
 
-  db.transaction(fn_select, null, ()=>console.log("select"))
+  db.transaction(fn_select, null, ()=>console.log("select", sql))
 }
+
+export const remove = obj => {
+  const sql = `
+  DELETE FROM user WHERE id LIKE '%?'
+  `
+  const fn_delete = tx  => tx.executeSql(sql, [2])
+  db.transaction(fn_delete, null, ()=>console.log("delete", sql))
+}
+
 
 export const get_uuid = () => uuid.v1()
 

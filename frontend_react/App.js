@@ -8,7 +8,7 @@ import UserList from "./screens/UserList"
 import UserInsert from "./screens/UserInsert"
 import UserDetail from "./screens/UserDetail"
 
-import {create_table, insert, selectall} from "./db"
+import {create_table, insert, remove, selectall} from "./db"
 
 //componente
 const Stack = createStackNavigator()
@@ -16,7 +16,9 @@ const Stack = createStackNavigator()
 function Screens(){
   create_table()
   insert()
+  remove()
   selectall()
+  
   //stack screen es cada pantalla
   //el orden de importa ya que son como capas de navegacion
   return (

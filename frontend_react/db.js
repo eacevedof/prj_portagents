@@ -20,24 +20,25 @@ export const create_table = ()=>{
 
 export const insert = obj => {
   const sql = `
-  INSERT INTO user (done, uuid) VALUES (0,?)
+  INSERT INTO user (done, uuid) VALUES (?,?)
   `
   const uuid = get_uuid()
-  const fn_insert = tx => tx.executeSql(sql, [ ])
+  //const fn_insert = tx => tx.executeSql(sql, [ ])
 
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
   
   db.transaction(tx => {
-    //tx => tx.executeSql(sql, [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
-  })
-
-
+      tx => tx.executeSql(sql, [0, uuid])
+    },
+    null, ()=>console.log("inerted 1")
+  )
+  
   
   db.transaction(
       tx => {
         tx.executeSql("insert into user (done, value) values (?, ?)", [0,uuid]);
         tx.executeSql("select * from user", [], 
-          (_, { rows }) => console.log(JSON.stringify(rows))
+          (_, { rows }) => console.log("all",JSON.stringify(rows))
         );
       },
       null,

@@ -44,7 +44,7 @@ export const insert = obj => {
 
 export const selectall = obj => {
   const sql = `
-  SELECT * FROM user
+  SELECT * FROM user ORDER BY id DESC
   `
   //const fn_select = tx  => tx.executeSql(sql, [ ])
   const fn_loader = function(_, { rows }) {console.table(rows)}

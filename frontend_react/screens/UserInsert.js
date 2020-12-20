@@ -1,13 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Button, TextInput, ScrollView, View } from 'react-native'
 
 const UserInsert = ()=>{
   return (
-    <div>
-        <View>
-          <Text>User Insert</Text>
-        </View>
-    </div>
+    <ScrollView>
+      <View>
+        <TextInput placeholder="Name" />
+      </View>
+      <View>
+        <TextInput placeholder="email" />
+      </View>
+      <View>
+        <TextInput placeholder="password" />
+      </View>
+      <View>
+        <Button title="Save User" />
+      </View>      
+    </ScrollView>
   )
 }
 

@@ -48,9 +48,7 @@ export const insert = obj => {
   db.transaction(
       tx => {
         tx.executeSql(sql, [0,uuid]);
-        tx.executeSql("select * from user", [], 
-          (_, { rows }) => console.log("all",JSON.stringify(rows))
-        );
+      
       },
       null,
       ()=>console.log("inserted ^^")
@@ -63,11 +61,12 @@ export const selectall = obj => {
   SELECT * FROM user
   `
   //const fn_select = tx  => tx.executeSql(sql, [ ])
-  //const fn_loader = (_, { rows }) => console.log(sql, JSON.stringify(rows))
+  const fn_loader = function(_, { rows }) {console.table(rows)}
   
   //db.transaction(fn_select, null, fn_loader)
   db.transaction(
     tx  => tx.executeSql(sql, [], (_, { rows }) => console.table(rows))
+    //tx  => tx.executeSql(sql, [], fn_loader)
   , null, ()=>console.log("select"))
 }
 

@@ -1,8 +1,16 @@
 import * as SQLite from 'expo-sqlite'
 import uuid from 'react-native-uuid'
 
+//https://docs.expo.io/versions/latest/sdk/sqlite/
+/**
+ * db.transaction(callback, error, success)
+ * tx.executeSql(sqlStatement, arguments, success, error)
+ * 
+ */
+
 
 const db = SQLite.openDatabase("portagent.db")
+
 
 
 export const create_table = ()=>{
@@ -20,8 +28,8 @@ export const create_table = ()=>{
   );
   `
 
-  db.transaction(tx => tx.executeSql(sql))
-  console.log("created:",sql)
+  db.transaction(tx => tx.executeSql(sql),e=>console.log("create table error",e),()=>console.log("create table",sql))
+  
 }
 
 export const insert = obj => {
@@ -32,7 +40,7 @@ export const insert = obj => {
   const arparam = [date, uuid, 0]
   const fn_insert = tx => tx.executeSql(sql, arparam)
 
-  db.transaction(fn_insert, null, ()=>console.log("inserted:", sql, arparam))
+  db.transaction(fn_insert, e=>console.log("insert error",e), ()=>console.log("inserted:", sql, arparam))
 }
 
 export const selectall = obj => {
@@ -43,7 +51,7 @@ export const selectall = obj => {
   const fn_loader = (objtx, r) => console.table(r.rows)
   const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
 
-  db.transaction(fn_select, null, ()=>console.log("select", sql))
+  db.transaction(fn_select, e=>console.log("select error",e), ()=>console.log("select", sql))
 }
 
 export const remove = obj => {
@@ -52,7 +60,7 @@ export const remove = obj => {
   `
   const arparam = [2]
   const fn_delete = tx  => tx.executeSql(sql, arparam)
-  db.transaction(fn_delete, null, ()=>console.log("delete", sql, arparam))
+  db.transaction(fn_delete, e=>console.log("delete error",e), ()=>console.log("delete", sql, arparam))
 }
 
 export const update = obj => {
@@ -63,7 +71,7 @@ export const update = obj => {
   `
   const arparam = ["uuu","%3"]
   const fn_update = tx  => tx.executeSql(sql, arparam)
-  db.transaction(fn_update, null, ()=>console.log("update", sql, arparam))
+  db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
 }
 
 

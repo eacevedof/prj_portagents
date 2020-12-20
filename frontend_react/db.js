@@ -32,10 +32,7 @@ export const insert = obj => {
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
   const arparam = [date, uuid, 0]
   db.transaction(
-      tx => {
-        tx.executeSql(sql, arparam);
-      
-      },
+      tx => tx.executeSql(sql, arparam),
       null,
       ()=>console.log("inserted",sql,arparam)
   )

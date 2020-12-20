@@ -43,7 +43,7 @@ export const selectall = obj => {
   
   //db.transaction(fn_select, null, fn_loader)
   db.transaction(
-    tx  => tx.executeSql(sql, [], (_, { rows }) => console.table(rows))
+    tx  => tx.executeSql(sql, [], fn_loader)
     //tx  => tx.executeSql(sql, [], fn_loader)
   , null, ()=>console.log("select"))
 }

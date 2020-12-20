@@ -4,14 +4,21 @@ import { StyleSheet, Text, View } from 'react-native'
 import {NavigationContainer, StackActions} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 
-const stacknav = createStackNavigator()
+import UserList from "./screens/UserList"
+import UserInsert from "./screens/UserInsert"
+import UserDetail from "./screens/UserDetail"
 
-function my_stack(){
+//componente
+const Stack = createStackNavigator()
+
+function Screens(){
   //stack screen es cada pantalla
+  //el orden de importa ya que son como capas de navegacion
   return (
     <Stack.Navigator>
-
-      <Stack.Screen />
+      <Stack.Screen name="UserList" component={UserList} />
+      <Stack.Screen name="UserInsert" component={UserInsert} />
+      <Stack.Screen name="UserDetail" component={UserDetail} />
     </Stack.Navigator>
   )
 }
@@ -20,7 +27,7 @@ function my_stack(){
 export default function App() {
   return (
     <NavigationContainer>
-
+      <Screens />
     </NavigationContainer>
   )
 }

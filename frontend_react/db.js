@@ -19,8 +19,9 @@ export const create_table = ()=>{
       done int
   );
   `
-  console.log("sql:",sql)
+
   db.transaction(tx => tx.executeSql(sql))
+  console.log("created:",sql)
 }
 
 export const insert = obj => {
@@ -31,14 +32,13 @@ export const insert = obj => {
   const arparam = [date, uuid, 0]
   const fn_insert = tx => tx.executeSql(sql, arparam)
 
-  db.transaction(fn_insert, null, ()=>console.log("inserted",sql,arparam))
+  db.transaction(fn_insert, null, ()=>console.log("inserted:", sql, arparam))
 }
 
 export const selectall = obj => {
   const sql = `
   SELECT * FROM user ORDER BY id DESC
   `
-
   // parametros func: (ojbect-transaction, object-resultset con rows y rowsAffected)
   const fn_loader = (objtx, r) => console.table(r.rows)
   const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
@@ -49,4 +49,3 @@ export const selectall = obj => {
 export const get_uuid = () => uuid.v1()
 
 export default db
-

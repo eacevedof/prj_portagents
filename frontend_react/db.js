@@ -7,15 +7,16 @@ const db = SQLite.openDatabase("portagent.db")
 
 export const create_table = ()=>{
   const sql1 = `
-  -- DROP TABLE IF EXISTS user;
+  DROP TABLE IF EXISTS user;
   `
 
   const sql = `
   CREATE TABLE IF NOT EXISTS user 
   (
       id integer primary key not null, 
-      done int, 
-      uuid text
+      insert_date text,
+      uuid text,
+      done int
   );
   `
   console.log("sql:",sql)
@@ -23,16 +24,13 @@ export const create_table = ()=>{
 }
 
 export const insert = obj => {
-  let sql = `
-  insert into user (done, value) values (?, ?)
-  `
-  sql = "INSERT INTO user (done, uuid) VALUES (?,?)"
-
+  const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
+  const date = (new Date()).toString()
   const uuid = get_uuid()
   //const fn_insert = tx => tx.executeSql(sql, [ ])
 
   //db.transaction(tx => fn_insert(tx), [uuid], ()=> console.log("success"),(a,b)=>console.log(a,b))
-  const arparam = [0, uuid]
+  const arparam = [date, uuid, 0]
   db.transaction(
       tx => {
         tx.executeSql(sql, arparam);

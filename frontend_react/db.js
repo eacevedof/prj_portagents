@@ -50,8 +50,9 @@ export const remove = obj => {
   const sql = `
   DELETE FROM user WHERE id = ?
   `
-  const fn_delete = tx  => tx.executeSql(sql, [2])
-  db.transaction(fn_delete, null, ()=>console.log("delete", sql))
+  const arparam = [2]
+  const fn_delete = tx  => tx.executeSql(sql, arparam)
+  db.transaction(fn_delete, null, ()=>console.log("delete", sql, arparam))
 }
 
 

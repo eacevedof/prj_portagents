@@ -59,11 +59,11 @@ export const update = obj => {
   const sql = `
   UPDATE user 
   SET uuid = ?
-  WHERE id = ?
+  WHERE id LIKE ?
   `
-  const arparam = ["xxx",3]
-  const fn_delete = tx  => tx.executeSql(sql, arparam)
-  db.transaction(fn_delete, null, ()=>console.log("delete", sql, arparam))
+  const arparam = ["uuu","%3"]
+  const fn_update = tx  => tx.executeSql(sql, arparam)
+  db.transaction(fn_update, null, ()=>console.log("update", sql, arparam))
 }
 
 

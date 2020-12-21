@@ -22,7 +22,7 @@
 #### Analisis:
 - Servidor AWS
     - Instancia EC2
-    - tendrá 3 entornos, 3 dominios (preferiblemente o al menos 2)
+    - tendrá 3 entornos, 3 dominios https (preferiblemente o al menos 2)
         - dev.<dominio.xyz>
         - test.<dominio.xyz>
         - <dominio.xyz>

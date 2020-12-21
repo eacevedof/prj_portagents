@@ -54,7 +54,7 @@
     - El terminal recopila un bloque de registros voucher con sus imágenes
     - Genera un hash con cada registro (incluye el encode de la imágen)
     - hace un post del hash y el payload
-    - si el payload no ha llegado completo o corrupto sera comprobado con el hash si no es válido se enviará un nok con un motivo al terminal
+    - si el payload no ha llegado completo o corrupto sera comprobado por medio del hash. Si no es válido se enviará un nok con un motivo al terminal
     - en caso de nok el terminal continuará con el siguiente marcando este voucher como no comunicado.
         - que sucede si el serv envia un nok y el terminal pierde la cobertura?
     - en caso de ok el terminal marcara como enviado el voucher

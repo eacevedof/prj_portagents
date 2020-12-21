@@ -47,7 +47,7 @@
         - tendra una interfaz para la generación de pdfs con firma (1)
         - habrá una interfaz para el envío por mail de ficheros generados (2)
     - **cron**
-        - es la rutina que comprobará (cada 3 minutos) constantemente si hay nuevos voucher nuevo en la bd (mysql)
+        - es la rutina que comprobará cada 3 minutos si hay nuevos voucher nuevo en la bd (mysql)
         - si es así, generará un pdf con la información (llamará a la interfaz 1) y despues llamará al ainterfaz (2)
 
 - **Las comunicaciones**: 

@@ -13,6 +13,7 @@ const db = SQLite.openDatabase("portagent.db")
 
 
 
+
 export const create_table = ()=>{
   const sql1 = `
   DROP TABLE IF EXISTS user;

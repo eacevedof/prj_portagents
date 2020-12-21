@@ -31,6 +31,8 @@
         - test
         - prod
 - App móvil que trabajará de modo offline:
+    - Se ajustará a un tamaño concreto de terminal
+    - El diseño de la interfaz de usuario será neutro
     - La bd local (sqlite) guardará los usuarios iniciales y sus accesos
     - El usuario hará login en el terminal según estos datos
     - La pantalla inicial será un listado con todos los voucher sin coumunicar, en caso de estár vacio se asume que se han enviado al servidor.

@@ -11,7 +11,24 @@ import uuid from 'react-native-uuid'
 
 const db = SQLite.openDatabase("portagent.db")
 
+const execute = (sql) => {
 
+  let result = null
+  let error = null
+
+  const on_error = e => {
+    error = e
+    console.log("exceute: ",sql,"error:",e)
+  }
+
+  const on_success = (tx, res) => {
+    result = res
+  }
+
+  db.transaction(tx => tx.executeSql(sql), on_error, on_success)
+  if(error) return error
+  return result
+}
 
 
 export const create_table = ()=>{

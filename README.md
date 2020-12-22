@@ -39,7 +39,7 @@
     - La opción de sincronización será manual de modo que se pueda enviar los datos al servidor cuando se asegure de tener suficiente cobertura.
     - Habrá un proceso de captura de firma.  La firma se dibujara sobre un elemento canvas que posteriormente se transformará en un string que se guardará en la bd
     - Habrá un botón para salir (logout) de la app, en ese momento se eliminarán los voucher enviados ok
-- App servidor: 
+- App servidor:
     - **bd en mysql**
         - será una bd espejo de lo que hay en (sqlite) el terminal
     - **api**

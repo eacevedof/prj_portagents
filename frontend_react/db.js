@@ -11,7 +11,7 @@ import uuid from 'react-native-uuid'
 
 const db = SQLite.openDatabase("portagent.db")
 
-const execute = (sql) => {
+const execute = (sql, params) => {
 
   let result = null
   let error = null
@@ -22,10 +22,11 @@ const execute = (sql) => {
   }
 
   const on_success = (tx, res) => {
+    console.log("on insert success")
     result = res
   }
 
-  db.transaction(tx => tx.executeSql(sql), on_error, on_success)
+  db.transaction(tx => tx.executeSql(sql, params), on_error, on_success)
   if(error) return error
   return result
 }
@@ -58,7 +59,9 @@ export const insert = obj => {
   const arparam = [date, uuid, 0]
   const fn_insert = tx => tx.executeSql(sql, arparam)
 
-  db.transaction(fn_insert, e=>console.log("insert error",e), ()=>console.log("inserted:", sql, arparam))
+  //db.transaction(fn_insert, e=>console.log("insert error",e), ()=>console.log("inserted:", sql, arparam))
+  const r = execute(sql, arparam)
+  console.log("insert r",r)
 }
 
 export const selectall = obj => {

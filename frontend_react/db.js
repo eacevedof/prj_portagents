@@ -46,7 +46,7 @@ export const drop_table = () =>{
   const sql = `
   DROP TABLE IF EXISTS user;
   `
-  const fn_onsuccess = (objtr, r) => console.log("drop_table: objtr",objtr,"resulset",r.rows)
+  const fn_onsuccess = (objtr, r) => {console.log("drop_table: objtr",objtr,"resulset"); console.table(r.rows)}
   executeobj({sql, fnsuccess:fn_onsuccess})
 }
 
@@ -61,7 +61,7 @@ export const create_table = ()=>{
   );
   `
   //execute(sql)
-  const fn_onsuccess = (objtr, r) => console.log("create_table: objtr",objtr,"resulset",r.rows)
+  const fn_onsuccess = (objtr, r) => {console.log("create_table: objtr",objtr,"resulset",r); console.table(r.rows)}
   executeobj({sql, fnsuccess:fn_onsuccess})
 }
 
@@ -69,15 +69,18 @@ export const insert = obj => {
   const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
   const date = (new Date()).toString()
   const uuid = get_uuid()
-  const arparam = [date, uuid, 0]
-  execute(sql, arparam,e=>console.log("e.insert",e))
+  const args = [date, uuid, 0]
+  //execute(sql, arparam,e=>console.log("e.insert",e))
+  const fn_onsuccess = (objtr, r) => {console.log("selectall: objtr",objtr,"resulset",r); console.table(r.rows)}
+  //query(sql,[],fn_loader)
+  executeobj({sql,args, fnsuccess:fn_onsuccess})  
 }
 
 export const selectall = obj => {
   const sql = `
   SELECT * FROM user ORDER BY id DESC
   `
-  const fn_onsuccess = (objtr, r) => console.log("selectall: objtr",objtr,"resulset",r.rows)
+  const fn_onsuccess = (objtr, r) => {console.log("selectall: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)
   executeobj({sql, fnsuccess:fn_onsuccess})
 }
@@ -87,7 +90,7 @@ export const remove = obj => {
   DELETE FROM user WHERE id = ?
   `
   const args = [2]
-  const fn_onsuccess = (objtr, r) => console.table("remove: objtr",objtr,"resulset",r)
+  const fn_onsuccess = (objtr, r) => {console.log("remove: objtr",objtr,"resulset",r); console.table(r.rows)}
   executeobj({sql, args, fnsuccess:fn_onsuccess})
 }
 
@@ -101,7 +104,7 @@ export const update = obj => {
   //const fn_update = tx  => tx.executeSql(sql, arparam)
   //db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
   //execute(sql, arparam)
-  const fn_onsuccess = (objtr, r) => console.table("update: objtr",objtr,"resulset",r)
+  const fn_onsuccess = (objtr, r) => {console.log("update: objtr",objtr,"resulset",r); console.table(r.rows)}
   executeobj({sql, args, fnsuccess:fn_onsuccess})
 }
 

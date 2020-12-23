@@ -94,10 +94,12 @@ export const update = obj => {
   SET uuid = ?
   WHERE id LIKE ?
   `
-  const arparam = ["uuu","%3"]
+  const args = ["uuu","%3"]
   //const fn_update = tx  => tx.executeSql(sql, arparam)
   //db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
-  execute(sql, arparam)
+  //execute(sql, arparam)
+  const fn_onsuccess = (objtr, r) => console.table("update: objtr",objtr,"resulset",r)
+  executeobj({sql, args, fnsuccess:fn_onsuccess})
 }
 
 export default db

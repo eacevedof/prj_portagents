@@ -42,17 +42,6 @@ const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={f
   db.transaction(fn_execute, trerror, trsuccess)
 }
 
-const queryobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
-  console.log("objex",objex)
-  const {sql, args, fnsuccess, fnerror} = objex
-  const {trsuccess, trerror} = objtr
-
-  const fn_execute = tx => tx.executeSql(sql, args, fnsuccess, fnerror)
-  db.transaction(fn_execute, trerror, trsuccess)
-}
-
-
-
 export const drop_table = () =>{
   const sql = `
   DROP TABLE IF EXISTS user;
@@ -85,22 +74,18 @@ export const selectall = obj => {
   const sql = `
   SELECT * FROM user ORDER BY id DESC
   `
-
-  const fn_loader = (objtx, r) => console.table(r.rows)
+  const fn_onsuccess = (objtr, r) => console.log("selectall: objtr",objtr,"resulset",r.rows)
   //query(sql,[],fn_loader)
-  queryobj({sql,fnsuccess:fn_loader})
-
+  executeobj({sql, fnsuccess:fn_onsuccess})
 }
 
 export const remove = obj => {
   const sql = `
   DELETE FROM user WHERE id = ?
   `
-  const arparam = [2]
-  const fn_delete = tx  => tx.executeSql(sql, arparam)
-  //db.transaction(fn_delete, e=>console.log("delete error",e), ()=>console.log("delete", sql, arparam))
-  
-  execute(sql, arparam)
+  const args = [2]
+  const fn_onsuccess = (objtr, r) => console.table("remove: objtr",objtr,"resulset",r)
+  executeobj({sql, args, fnsuccess:fn_onsuccess})
 }
 
 export const update = obj => {

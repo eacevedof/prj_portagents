@@ -46,7 +46,8 @@ export const drop_table = () =>{
   const sql = `
   DROP TABLE IF EXISTS user;
   `
-  //execute(sql)
+  const fn_onsuccess = (objtr, r) => console.log("drop_table: objtr",objtr,"resulset",r.rows)
+  executeobj({sql, fnsuccess:fn_onsuccess})
 }
 
 export const create_table = ()=>{
@@ -59,7 +60,9 @@ export const create_table = ()=>{
       done int
   );
   `
-  execute(sql)  
+  //execute(sql)
+  const fn_onsuccess = (objtr, r) => console.log("create_table: objtr",objtr,"resulset",r.rows)
+  executeobj({sql, fnsuccess:fn_onsuccess})
 }
 
 export const insert = obj => {

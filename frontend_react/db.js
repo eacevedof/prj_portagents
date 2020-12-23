@@ -7,35 +7,24 @@ import uuid from 'react-native-uuid'
  * tx.executeSql(sqlStatement, arguments, success, error)
  * 
  */
-
-
 const db = SQLite.openDatabase("portagent.db")
 
-const execute = (sql, params) => {
-
-  let result = null
-  let error = null
-
-  const on_error = e => {
-    error = e
-    console.log("exceute: ",sql,"error:",e)
-  }
-
-  const on_success = (tx, res) => {
-    console.log("on insert success")
-    result = res
-  }
-
-  db.transaction(tx => tx.executeSql(sql, params), on_error, on_success)
-  if(error) return error
-  return result
+const execute = (sql, params=[], fn_onerror=null, fn_onsuccess=null) => {
+  //los parametros mejor en un objeto y hacer {a,b} = obj
+  const fn_execute = tx => tx.executeSql(sql, params)
+  db.transaction(fn_execute, fn_onerror, fn_onsuccess)
 }
 
 
-export const create_table = ()=>{
-  const sql1 = `
+export const drop_table = () =>{
+  const sql = `
   DROP TABLE IF EXISTS user;
   `
+  execute(sql)
+}
+
+export const create_table = ()=>{
+  
 
   const sql = `
   CREATE TABLE IF NOT EXISTS user 
@@ -46,9 +35,7 @@ export const create_table = ()=>{
       done int
   );
   `
-
-  db.transaction(tx => tx.executeSql(sql),e=>console.log("create table error",e),()=>console.log("create table",sql))
-  
+  execute(sql)  
 }
 
 export const insert = obj => {

@@ -43,6 +43,7 @@ const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={f
 }
 
 const queryobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
+  console.log("objex",objex)
   const {sql, args, fnsuccess, fnerror} = objex
   const {trsuccess, trerror} = objtr
 
@@ -84,12 +85,11 @@ export const selectall = obj => {
   const sql = `
   SELECT * FROM user ORDER BY id DESC
   `
-  // parametros func: (ojbect-transaction, object-resultset con rows y rowsAffected)
-  const fn_loader = (objtx, r) => console.table(r.rows)
-  //const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
 
-  query(sql,[],fn_loader)
-  //db.transaction(fn_select, e=>console.log("select error",e), ()=>console.log("select", sql))
+  const fn_loader = (objtx, r) => console.table(r.rows)
+  //query(sql,[],fn_loader)
+  queryobj({sql,args:[],fnsuccess:fn_loader})
+
 }
 
 export const remove = obj => {

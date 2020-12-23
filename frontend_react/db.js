@@ -34,8 +34,7 @@ const query = (sql, params=[], fn_onload, fn_onerror, fn_onsuccess) => {
   db.transaction(fn_query, fn_onerror, fn_onsuccess)
 }
 
-//ex={sql:"",args:[],fnsuccess:null,fnerror:null}, tr={fnsuccess=null,fnerror=null} 
-const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, obtr={fnsuccess:null,fnerror:null} ) => {
+const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
   const {sql, args, fnsuccess, fnerror} = objex
   const {trsuccess, trerror} = objtr
 

@@ -88,7 +88,7 @@ export const selectall = obj => {
 
   const fn_loader = (objtx, r) => console.table(r.rows)
   //query(sql,[],fn_loader)
-  queryobj({sql,args:[],fnsuccess:fn_loader})
+  queryobj({sql,fnsuccess:fn_loader})
 
 }
 

@@ -42,6 +42,15 @@ const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={f
   db.transaction(fn_execute, trerror, trsuccess)
 }
 
+const queryobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
+  const {sql, args, fnsuccess, fnerror} = objex
+  const {trsuccess, trerror} = objtr
+
+  const fn_execute = tx => tx.executeSql(sql, args, fnsuccess, fnerror)
+  db.transaction(fn_execute, trerror, trsuccess)
+}
+
+
 
 export const drop_table = () =>{
   const sql = `

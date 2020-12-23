@@ -9,10 +9,18 @@ import uuid from 'react-native-uuid'
  */
 const db = SQLite.openDatabase("portagent.db")
 
+const get_uuid = () => uuid.v1()
+
 const execute = (sql, params=[], fn_onerror=null, fn_onsuccess=null) => {
   //los parametros mejor en un objeto y hacer {a,b} = obj
   const fn_execute = tx => tx.executeSql(sql, params)
   db.transaction(fn_execute, fn_onerror, fn_onsuccess)
+}
+
+const query = (sql, params=[], fn_onload, fn_onerror, fn_onsuccess) => {
+  //los parametros mejor en un objeto y hacer {a,b} = obj
+  const fn_query = tx => tx.executeSql(sql, params, fn_onload)
+  db.transaction(fn_query, fn_onerror, fn_onsuccess)
 }
 
 
@@ -20,12 +28,10 @@ export const drop_table = () =>{
   const sql = `
   DROP TABLE IF EXISTS user;
   `
-  execute(sql)
+  //execute(sql)
 }
 
 export const create_table = ()=>{
-  
-
   const sql = `
   CREATE TABLE IF NOT EXISTS user 
   (
@@ -42,13 +48,8 @@ export const insert = obj => {
   const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
   const date = (new Date()).toString()
   const uuid = get_uuid()
-
   const arparam = [date, uuid, 0]
-  const fn_insert = tx => tx.executeSql(sql, arparam)
-
-  //db.transaction(fn_insert, e=>console.log("insert error",e), ()=>console.log("inserted:", sql, arparam))
-  const r = execute(sql, arparam)
-  console.log("insert r",r)
+  execute(sql, arparam,e=>console.log("e.insert",e))
 }
 
 export const selectall = obj => {
@@ -57,9 +58,10 @@ export const selectall = obj => {
   `
   // parametros func: (ojbect-transaction, object-resultset con rows y rowsAffected)
   const fn_loader = (objtx, r) => console.table(r.rows)
-  const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
+  //const fn_select = tx  => tx.executeSql(sql, [], fn_loader)
 
-  db.transaction(fn_select, e=>console.log("select error",e), ()=>console.log("select", sql))
+  query(sql,[],fn_loader)
+  //db.transaction(fn_select, e=>console.log("select error",e), ()=>console.log("select", sql))
 }
 
 export const remove = obj => {
@@ -68,7 +70,9 @@ export const remove = obj => {
   `
   const arparam = [2]
   const fn_delete = tx  => tx.executeSql(sql, arparam)
-  db.transaction(fn_delete, e=>console.log("delete error",e), ()=>console.log("delete", sql, arparam))
+  //db.transaction(fn_delete, e=>console.log("delete error",e), ()=>console.log("delete", sql, arparam))
+  
+  execute(sql, arparam)
 }
 
 export const update = obj => {
@@ -78,11 +82,9 @@ export const update = obj => {
   WHERE id LIKE ?
   `
   const arparam = ["uuu","%3"]
-  const fn_update = tx  => tx.executeSql(sql, arparam)
-  db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
+  //const fn_update = tx  => tx.executeSql(sql, arparam)
+  //db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
+  execute(sql, arparam)
 }
-
-
-export const get_uuid = () => uuid.v1()
 
 export default db

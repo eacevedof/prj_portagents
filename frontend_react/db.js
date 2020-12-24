@@ -22,6 +22,8 @@ const db = SQLite.openDatabase("portagent.db")
 
 const get_uuid = () => uuid.v1()
 
+const get_ymdhis = () => (new Date()).toISOString().replace(/T/,' ').replace(/\..+/,'')
+
 const execute = (sql, params=[], fn_onerror=null, fn_onsuccess=null) => {
   //los parametros mejor en un objeto y hacer {a,b} = obj
   const fn_execute = tx => tx.executeSql(sql, params)
@@ -67,7 +69,7 @@ export const create_table = ()=>{
 
 export const insert = obj => {
   const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
-  const date = (new Date()).toString()
+  const date = get_ymdhis()
   const uuid = get_uuid()
   const args = [date, uuid, 0]
   //execute(sql, arparam,e=>console.log("e.insert",e))

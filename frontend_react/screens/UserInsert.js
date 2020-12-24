@@ -1,6 +1,23 @@
 import React, {useState} from 'react'
 import { StyleSheet, Button, TextInput, ScrollView, View } from 'react-native'
 
+import {create_table, insert, remove, selectall, update, empty_user} from "../db"
+
+const fn_crud = ()=>{
+  create_table()
+  insert()
+  remove()
+  update()
+  selectall()
+}
+
+
+const ins = ()=>{
+  //empty_user()
+  insert()
+  selectall()
+}
+
 const UserInsert = ()=>{
 
   const [state, set_state] = useState({
@@ -24,7 +41,7 @@ const UserInsert = ()=>{
         <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
       </View>
       <View style={styles.inputgroup}>
-        <Button title="Save User" onPress={()=>console.log(state)} />
+        <Button title="Save User" onPress={e => ins()} />
       </View>
     </ScrollView>
   )

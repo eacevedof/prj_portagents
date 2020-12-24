@@ -75,6 +75,7 @@ export const insert = obj => {
   //execute(sql, arparam,e=>console.log("e.insert",e))
   const fn_onsuccess = (objtr, r) => {console.log("selectall: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)
+  //alert("xxx")
   executeobj({sql,args, fnsuccess:fn_onsuccess})  
 }
 
@@ -94,6 +95,15 @@ export const remove = obj => {
   const args = [2]
   const fn_onsuccess = (objtr, r) => {console.log("remove: objtr",objtr,"resulset",r); console.table(r.rows)}
   executeobj({sql, args, fnsuccess:fn_onsuccess})
+}
+
+export const empty_user = obj => {
+  const sql = `
+  DELETE FROM user WHERE 1
+  `
+  const args = []
+  const fn_onsuccess = (objtr, r) => {console.log("remove: objtr",objtr,"resulset",r); console.table(r.rows)}
+  executeobj({sql, args, fnsuccess:fn_onsuccess})  
 }
 
 export const update = obj => {

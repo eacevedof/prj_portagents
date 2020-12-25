@@ -6,36 +6,38 @@ import {ListItem, Avatar} from "react-native-elements"
 
 const UserList = (props)=>{
 
-  const [users, set_users] = useState([])
+  const [users, set_users] = useState([{id:-1,name:"uuu 1"},{id:-2,name:"uuu 2"},])
 
   const obj = {
     fn: (tr, r)=>{
       const rows = Array.from(r.rows)
-      //rows.forEach(o => console.log(o))
+      console.table(rows)
       set_users(rows)
-      //console.log("UUUUUSSSS",rows[0],rows)
-    }  
+    }
   }
 
   useEffect(()=>{
-    selectall(obj)
-    
-    return ()=> console.log("userlist.index unmounting")
+    //selectall(obj)
+    console.log(users)
+    //return ()=> console.log("userlist.index unmounting")
   },[])
 
   return (
     <ScrollView>
-      <Button title="Insert" onPress={()=> props.navigation.navigate("UserInsert")} />
+      <Button 
+        title="Insert" 
+        onPress={()=> props.navigation.navigate("UserInsert")} 
+      />
       {
         users.map(user => {
-            <ListItem 
-              key={user.id}
-            >
-              <ListItem.Chevron />
-              <ListItem.Content>
-                <ListItem.Title>user.name</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
+            return (
+              <ListItem key={user.id}>
+                <ListItem.Chevron />
+                <ListItem.Content>
+                  <ListItem.Title>user.name</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            )
         })
       }
     </ScrollView>

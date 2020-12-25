@@ -8,7 +8,7 @@ const UserInsert = (props)=>{
     name: '', email: '', phone: '', password: '1234'
   })
 
-  const user_insert = () => insertfn(user, ()=> props.navigation.navigate("UserList",{isnew:true}))
+  const user_insert = () => insertfn({...user}, ()=> props.navigation.navigate("UserList",{isnew:true}))
   
   const handleChangeText = (name, value) => {
     set_user({...user, [name]: value})

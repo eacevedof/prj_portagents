@@ -18,6 +18,7 @@ const UserDetail = (props)=>{
 
   const update_user = () => {
     updatefn(user, ()=> IS.WEB? alert("updated") : Alert.alert("updated") )
+    selectdetail(user.id, on_select)
   }
 
   const delete_user = () => {
@@ -83,6 +84,9 @@ const UserDetail = (props)=>{
           value={user.password}
           onChangeText={v => input_onchange('password', v)} />
       </View>
+      <View style={styles.inputgroup} >
+        <Text>created at: {user.insert_date} - updated at:{user.update_date}</Text>
+      </View>      
       <View style={styles.inputgroup}>
         <Button 
           color="#19AC52"

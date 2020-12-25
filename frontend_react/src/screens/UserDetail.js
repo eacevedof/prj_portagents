@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator} from 'react-native'
+import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator, Text} from 'react-native'
 import {selectdetail, updatefn, deletefn} from "../modules/base_user/repository"
 
 const UserDetail = (props)=>{
@@ -45,6 +45,9 @@ const UserDetail = (props)=>{
 
   return (
     <ScrollView style={styles.container} >
+      <View style={styles.inputgroup} >
+        <Text>{user.id} - {user.uuid}</Text>
+      </View>
       <View style={styles.inputgroup} >
         <TextInput placeholder="name" 
           value={user.name}

@@ -31,7 +31,7 @@ const UserDetail = (props)=>{
   },[props])
 
 
-  const handleChangeText = (name, value) => {
+  const input_onchange = (name, value) => {
     set_user({...user, [name]: value})
   }
 
@@ -48,22 +48,22 @@ const UserDetail = (props)=>{
       <View style={styles.inputgroup} >
         <TextInput placeholder="name" 
           value={user.name}
-          onChangeText={v => handleChangeText('name', v)} />
+          onChangeText={v => input_onchange('name', v)} />
       </View>
       <View style={styles.inputgroup}>
         <TextInput placeholder="email" 
           value={user.email}
-          onChangeText={v => handleChangeText('email', v)}  />
+          onChangeText={v => input_onchange('email', v)}  />
       </View>
       <View style={styles.inputgroup}>
         <TextInput placeholder="phone" 
           value={user.phone}
-          onChangeText={v => handleChangeText('phone', v)} />
+          onChangeText={v => input_onchange('phone', v)} />
       </View>
       <View style={styles.inputgroup}>
         <TextInput placeholder="password" 
           value={user.password}
-          onChangeText={v => handleChangeText('password', v)} />
+          onChangeText={v => input_onchange('password', v)} />
       </View>
       <View style={styles.inputgroup}>
         <Button 

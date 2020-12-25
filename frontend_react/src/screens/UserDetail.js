@@ -11,7 +11,6 @@ const UserDetail = (props)=>{
 
   const on_select = (tr, rs) => {
     const rows = Array.from(rs.rows)
-    console.table(rows[0])
     set_user({...rows[0]})
     set_isloading(false)
   }

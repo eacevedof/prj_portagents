@@ -1,6 +1,5 @@
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
-import uuid from 'react-native-uuid'
 
 //https://docs.expo.io/versions/latest/sdk/sqlite/
 /**
@@ -24,7 +23,18 @@ const DB_NAME = "portagent.db"
 
 const db = SQLite.openDatabase(DB_NAME)
 
-export const get_uuid = () => uuid.v1()
+export const get_uuid = () => {
+  var result, i, j;
+  result = '';
+  for(j=0; j<32; j++) {
+    if( j == 8 || j == 12 || j == 16 || j == 20)
+      result = result + '-';
+    i = Math.floor(Math.random()*16).toString(16).toUpperCase();
+    result = result + i;
+  }
+  return result
+
+}
 
 export const get_ymdhis = () => (new Date()).toISOString().replace(/T/,' ').replace(/\..+/,'')
 

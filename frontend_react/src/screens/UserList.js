@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react'
 //import {useIsFocused} from "react-navigation/native"
-import { StyleSheet, Button, ScrollView } from 'react-native'
+import { StyleSheet, View, Button, ScrollView, ActivityIndicator } from 'react-native'
 import {selectallfn,drop_table,create_table} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
 
 
 const UserList = (props)=>{
 
-  //const isFocused = useIsFocused()
+  const [isloading, set_isloading] = useState(true)
   const [users, set_users] = useState([])
 
   const on_select = (tr, rs) => {
+    console.log("list on select")
     const rows = Array.from(rs.rows)
-    console.table(rows)
     set_users(rows)
+    set_isloading(false)
   }
 
   const item_onpress = (userid) => {
@@ -21,12 +22,23 @@ const UserList = (props)=>{
   }
 
   useEffect(()=>{
-    //drop_table()
-    //create_table()
     console.log("userlist.loaded")
-    selectallfn(on_select)
-    return () => set_users([])
+    let ismounted = true;
+
+    create_table()
+    
+    if(ismounted) selectallfn(on_select)
+    console.log("userlist.end loaded")
+    return () => ismounted=false
   },[props])
+
+  if(isloading){
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#9e9e9e" />
+      </View>
+    )
+  }
 
   return (
     <ScrollView>

@@ -20,6 +20,8 @@
 - `npm i react-native-uuid`
 - `npm i expo-file-system`
 - [`npm i react-native-elements`](https://reactnativeelements.com/docs/overview)
+- [npm install buffer --save](https://stackoverflow.com/questions/55226768/error-unable-to-resolve-module-buffer-react-native)
+  - Necesario por error de buffer 
 
 #### Analisis:
 - Servidor AWS

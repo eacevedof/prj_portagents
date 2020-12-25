@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+//import {useIsFocused} from "react-navigation/native"
 import { StyleSheet, Button, ScrollView } from 'react-native'
 import {selectall} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
@@ -6,6 +7,7 @@ import {ListItem, Avatar} from "react-native-elements"
 
 const UserList = (props)=>{
 
+  //const isFocused = useIsFocused()
   const [users, set_users] = useState([])
 
   const obj = {
@@ -16,13 +18,20 @@ const UserList = (props)=>{
     }
   }
 
+  const is_focused = props.navigation.addListener("didFocus",()=>{
+    alert("fucus")
+    selectall(obj)
+  })
+
+  const item_onpress = (userid) => {
+    props.navigation.navigate("UserDetail",{user_id:userid})
+  }
+
   useEffect(()=>{
     console.log("userlist.loaded")
     selectall(obj)
-    return ()=> set_users([])
-  },[])
-
-  //if(!users) return null
+    return () => is_focused
+  },[props])
 
   return (
     <ScrollView>
@@ -33,7 +42,7 @@ const UserList = (props)=>{
       {
         users.map(user => {
             return (
-              <ListItem key={user.id}>
+              <ListItem key={user.id} bottomDivider onPress={() => item_onpress(user.id)}>
                 <ListItem.Chevron />
                 <Avatar 
                   source={{uri: `https://randomuser.me/api/portraits/men/${user.id}.jpg`}}

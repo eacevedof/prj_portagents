@@ -9,8 +9,11 @@ const UserInsert = (props)=>{
   })
 
   const user_insert = () => {
-    insert({...user})
-    props.navigation.navigate("UserList")
+    insert({
+      ...user,
+      fn: ()=> props.navigation.navigate("UserList",{isnew:true})
+    })
+    
   }  
 
   const handleChangeText = (name, value) => {

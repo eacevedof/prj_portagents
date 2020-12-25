@@ -32,10 +32,10 @@ export const insert = obj => {
   const uuid = get_uuid()
   const args = [date, uuid, obj.name, obj.email, obj.phone, obj.password]
   //execute(sql, arparam,e=>console.log("e.insert",e))
-  const fn_onsuccess = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.table(r.rows)}
+  //const fn_onsuccess = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)
   //alert("xxx")
-  executeobj({sql,args, fnsuccess:fn_onsuccess})  
+  executeobj({sql,args, fnsuccess:obj.fn})  
 }
 
 export const selectall1 = () => {

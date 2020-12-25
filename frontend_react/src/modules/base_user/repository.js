@@ -96,8 +96,7 @@ export const updatefn = (user, fnok, fnnok=null) => {
   SET  name = ?,
   email = ?,
   phone = ?,
-  password = ?,
-
+  password = ?
   WHERE 1=1
   AND id = ?
   `

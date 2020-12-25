@@ -14,7 +14,6 @@ const UserInsert = (props)=>{
       //esto ha solucionado el error cant perfom react state update ona unmounted component
       fn: ()=> props.navigation.navigate("UserList",{isnew:true})
     })
-    
   }  
 
   const handleChangeText = (name, value) => {

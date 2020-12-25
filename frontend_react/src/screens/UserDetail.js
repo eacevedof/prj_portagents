@@ -1,8 +1,28 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { StyleSheet, Button, TextInput, ScrollView, View} from 'react-native'
+import {selectdetail, updatefn} from "../modules/base_user/repository"
 
 const UserDetail = (props)=>{
-  console.log(props.route.params.userid)
+  
+  const [user, set_user] = useState({})
+
+  const on_select = (tr, rs) => {
+    const rows = Array.from(rs.rows)
+    console.table(rows)
+    set_user({...rows[0]})
+  }
+
+  const update_user = () => {
+    updatefn(user, ()=> alert("updated"))
+  }
+
+  useEffect(()=>{
+    console.log("userdetail.loaded")
+    userid = props.route.params.userid
+    selectdetail(userid, on_select)
+    return () => set_user([])
+  },[props])
+
   return (
     <ScrollView style={styles.container} >
       <View style={styles.inputgroup} >
@@ -15,10 +35,25 @@ const UserDetail = (props)=>{
         <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
       </View>
       <View style={styles.inputgroup}>
-        <Button title="Save User" onPress={e => user_insert()} />
+        <Button title="Save User" onPress={e => update_user()} />
       </View>
     </ScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 40,
+  },
+
+  inputgroup: {
+    flex: 1,
+    padding:0,
+    marginBottom:15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc'
+  },
+})
 
 export default UserDetail

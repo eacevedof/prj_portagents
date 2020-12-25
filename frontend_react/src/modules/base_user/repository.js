@@ -90,6 +90,23 @@ export const empty_base_user = obj => {
   executeobj({sql, args, fnsuccess:fn_onsuccess})  
 }
 
+export const updatefn = (user, fnok, fnnok=null) => {
+  const sql = `
+  UPDATE base_user 
+  SET  name = ?,
+  email = ?,
+  phone = ?,
+  password = ?,
+
+  WHERE 1=1
+  AND id = ?
+  `
+  const args = [user.name, user.email, user.phone, user.password, user.id]
+  executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
+}
+
+
+
 export const update = obj => {
   const sql = `
   UPDATE base_user 

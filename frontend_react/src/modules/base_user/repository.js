@@ -4,6 +4,7 @@ export const drop_table = () =>{
     const sql = `
     DROP TABLE IF EXISTS base_user;
     `
+    console.log(sql)
     const fn_onsuccess = (objtr, r) => {console.log("drop_table: objtr",objtr,"resulset"); console.log(r.rows)}
     executeobj({sql, fnsuccess:fn_onsuccess})
   }

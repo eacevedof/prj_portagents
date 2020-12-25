@@ -13,7 +13,7 @@ const UserInsert = (props)=>{
     password: '1234'
   })
 
-  const user_insert = () => insertfn(user, ()=>set_issaved(true))
+  const user_insert = () => insertfn(user, ()=>set_issaved(true), (e)=>console.log("insert error",e))
   //const user_insert = () => insertfn(user, ()=> props.navigation.navigate("UserList",{isnew:true}))
   
   const input_onchange = (name, value) => {

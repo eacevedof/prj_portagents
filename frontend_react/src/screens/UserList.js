@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Button, ScrollView, ActivityIndicator } from 'react-native'
 import {selectallfn,drop_table,create_table} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
+import IS from "../infrastructure/env"
 
 
 const UserList = (props)=>{
@@ -12,7 +13,9 @@ const UserList = (props)=>{
 
   const on_select = (tr, rs) => {
     console.log("list on select")
-    const rows = Array.from(rs.rows)
+    let rows = []
+    if(IS.WEB) rows = Array.from(rs.rows)
+    else rows = rs.rows._array
     set_users(rows)
     set_isloading(false)
   }
@@ -24,7 +27,7 @@ const UserList = (props)=>{
   useEffect(()=>{
     console.log("userlist.loaded")
     
-    //drop_table()
+    drop_table()
     create_table()
     selectallfn(on_select)
 

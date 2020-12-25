@@ -4,6 +4,8 @@ import {insertfn} from "../modules/base_user/repository"
 
 const UserInsert = (props)=>{
 
+  const [issaved, set_issaved] = useState(false)
+  
   const [user, set_user] = useState({
     name: '', 
     email: '', 
@@ -11,28 +13,30 @@ const UserInsert = (props)=>{
     password: '1234'
   })
 
-  const user_insert = () => insertfn(user)
+  const user_insert = () => insertfn(user, ()=>set_issaved(true))
   //const user_insert = () => insertfn(user, ()=> props.navigation.navigate("UserList",{isnew:true}))
   
-  const handleChangeText = (name, value) => {
+  const input_onchange = (name, value) => {
     set_user({...user, [name]: value})
   }
 
   useEffect(()=>{
-    console.log("insert loaded")
-    return ()=> set_user({})
-  },[])
+    console.log("insert loaded",issaved)
+    //esto es lo que provoca el error, el ir al componente que no está descargado
+    //if(issaved) props.navigation.navigate("UserList",{isnew:true})
+    return () => set_user({})
+  },[issaved])
 
   return (
     <ScrollView style={styles.container} >
       <View style={styles.inputgroup} >
-        <TextInput placeholder="Name" onChangeText={v => handleChangeText('name', v)} />
+        <TextInput placeholder="Name" onChangeText={v => input_onchange('name', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="email" onChangeText={v => handleChangeText('email', v)} />
+        <TextInput placeholder="email" onChangeText={v => input_onchange('email', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
+        <TextInput placeholder="phone" onChangeText={v => input_onchange('phone', v)}/>
       </View>
       <View style={styles.inputgroup}>
         <Button title="Save User" onPress={e => user_insert()} />

@@ -8,15 +8,16 @@ const UserList = ()=>{
   const [users, set_users] = useState([])
 
   const obj = {
-    fnsuccess: (tr, r)=>{
+    fn: (tr, r)=>{
       set_users(r.rows)
     }  
   }
 
   useEffect(()=>{
-    console.log("useeff",obj)
+    //if(typeof obj === "undefined") return
+    console.log("UUUUU EEEEFFF OOOOBBBJJ",obj)
     selectall(obj)
-    return ()=> console.log("product.index unmounting")
+    return ()=> console.log("userlist.index unmounting",users)
   },[])
 
   return (

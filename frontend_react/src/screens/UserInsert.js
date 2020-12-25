@@ -34,7 +34,7 @@ const UserInsert = (props)=>{
     create_table()
     insert(state)
     show_toast() 
-    selectall()
+    //selectall()
     props.navigation.navigate("UserList")
   }  
 

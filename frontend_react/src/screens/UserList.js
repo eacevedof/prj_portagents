@@ -17,10 +17,8 @@ const UserList = (props)=>{
     set_isloading(false)
   }
 
-  const item_onpress = (userid) => {
-    props.navigation.navigate("UserDetail",{userid})
-  }
-
+  const item_onpress = (userid) => props.navigation.navigate("UserDetail",{userid})
+  
   useEffect(()=>{
     console.log("userlist.loaded")
     let ismounted = true;

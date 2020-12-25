@@ -54,6 +54,24 @@ export const selectall = (obj) => {
   executeobj({sql, fnsuccess: obj.fn})
 }
 
+export const selectallfn = (fnok, fnnok=null) => {
+  const sql = `
+  SELECT * FROM base_user ORDER BY id DESC
+  `
+  executeobj({sql, fnsuccess: fnok, fnerror: fnnok})
+}
+
+
+export const selectdetail = (id, fnok, fnnok=null) => {
+  const sql = `
+  SELECT * 
+  FROM base_user 
+  WHERE 1=1
+  AND id = ?
+  `
+  executeobj({sql, args:[id], fnsuccess: fnok, fnerror: fnnok})
+}
+
 export const remove = obj => {
   const sql = `
   DELETE FROM base_user WHERE id = ?

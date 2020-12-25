@@ -17,7 +17,7 @@ const UserDetail = (props)=>{
   }
 
   const update_user = () => {
-    updatefn(user, ()=> Alert.alert("updated"))
+    updatefn(user, ()=> IS.WEB? alert("updated") : Alert.alert("updated") )
   }
 
   const delete_user = () => {

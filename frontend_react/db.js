@@ -59,7 +59,10 @@ export const create_table = ()=>{
       id integer primary key not null, 
       insert_date text,
       uuid text,
-      done int
+      name text,
+      email text,
+      phone text,
+      password text
   );
   `
   //execute(sql)
@@ -68,10 +71,10 @@ export const create_table = ()=>{
 }
 
 export const insert = obj => {
-  const sql = "INSERT INTO user (insert_date, uuid, done) VALUES (?,?,?)"
+  const sql = "INSERT INTO user (insert_date, uuid, name, email, phone, password) VALUES (?,?,?,?,?,?)"
   const date = get_ymdhis()
   const uuid = get_uuid()
-  const args = [date, uuid, 0]
+  const args = [date, uuid, obj.name, obj.email, obj.phone, obj.password]
   //execute(sql, arparam,e=>console.log("e.insert",e))
   const fn_onsuccess = (objtr, r) => {console.log("selectall: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)

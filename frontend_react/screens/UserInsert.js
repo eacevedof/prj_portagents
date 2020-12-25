@@ -1,27 +1,38 @@
 import React, {useState} from 'react'
-import { StyleSheet, Button, TextInput, ScrollView, View } from 'react-native'
 
-import {create_table, insert, remove, selectall, update, empty_user} from "../db"
+import { StyleSheet, Button, TextInput, ScrollView, View, ToastAndroid, AlertIOS} from 'react-native'
 
-const fn_crud = ()=>{
+import IS from "../src/infrastructure/env"
+import {create_table, insert, remove, selectall, update, drop_table} from "../db"
+
+const db_init = ()=>{
+  drop_table()
   create_table()
-  insert()
-  remove()
-  update()
-  selectall()
+  //insert()
+  //remove()
+  //update()
+  //selectall()
 }
 
 
-const ins = ()=>{
+const user_insert = objuser=>{
+  //db_init()
   //empty_user()
-  insert()
-  selectall()
+  insert(objuser)
+  show_toast() 
+}
+
+const show_toast = ()=>{
+  const msg = "uuuuu"
+  if(IS.ANDROID) ToastAndroid.show(msg, ToastAndroid.SHORT)
+  if(IS.IOS) AlertIOS.alert(msg)
+  if(IS.WEB) alert(msg)
 }
 
 const UserInsert = ()=>{
 
   const [state, set_state] = useState({
-    name: '', email: '', phone: ''
+    name: '', email: '', phone: '', password: '1234'
   })
 
 
@@ -41,7 +52,7 @@ const UserInsert = ()=>{
         <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
       </View>
       <View style={styles.inputgroup}>
-        <Button title="Save User" onPress={e => ins()} />
+        <Button title="Save User" onPress={e => user_insert(state)} />
       </View>
     </ScrollView>
   )

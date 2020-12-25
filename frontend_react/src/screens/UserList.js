@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Button, ScrollView } from 'react-native'
 import {selectall} from "../modules/base_user/repository"
 
 
-const UserList = ()=>{
+const UserList = (props)=>{
 
   const [users, set_users] = useState([])
 
@@ -19,11 +19,14 @@ const UserList = ()=>{
   },[])
 
   return (
-    <div>
-        <View>
-          <Text>User List</Text>
-        </View>
-    </div>
+    <ScrollView>
+      <Button title="Insert" onPress={()=> props.navigation.navigate("UserInsert")} />
+      {
+        users.map(user => {
+          
+        })
+      }
+    </ScrollView>
   )
 }
 

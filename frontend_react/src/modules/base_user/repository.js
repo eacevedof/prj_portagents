@@ -39,12 +39,13 @@ export const insert = obj => {
 }
 
 export const selectall = obj => {
+  if(typeof obj === "undefined") return 
   const sql = `
   SELECT * FROM base_user ORDER BY id DESC
   `
   const fn_onsuccess = (objtr, r) => {console.log("selectall: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)
-  executeobj({sql, fnsuccess:fn_onsuccess})
+  executeobj({sql, fnsuccess: obj.fnsuccess})
 }
 
 export const remove = obj => {

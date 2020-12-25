@@ -21,6 +21,7 @@ const user_insert = objuser=>{
   create_table()
   insert(objuser)
   show_toast() 
+  selectall()
 }
 
 const show_toast = ()=>{

@@ -1,4 +1,4 @@
-import {excecuteobj, get_uuid, get_ymdhis} from "../../infrastructure/db"
+import executeobj, {get_uuid, get_ymdhis} from "../../infrastructure/db"
 
 export const drop_table = () =>{
     const sql = `

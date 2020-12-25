@@ -17,11 +17,19 @@ const UserDetail = (props)=>{
     updatefn(user, ()=> alert("updated"))
   }
 
+  const delete_user = () => {
+    updatefn(user, ()=> alert("updated"))
+  }
+
   useEffect(()=>{
     console.log("userdetail.loaded")
     selectdetail(userid, on_select)
     return () => set_user([])
   },[props])
+
+  const handleChangeText = (name, value) => {
+    set_user({...user, [name]: value})
+  }
 
   return (
     <ScrollView style={styles.container} >
@@ -29,13 +37,17 @@ const UserDetail = (props)=>{
         <TextInput placeholder="Name" onChangeText={v => handleChangeText('name', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="email" onChangeText={v => handleChangeText('email', v)} />
+        <TextInput placeholder="email" onChangeText={v => handleChangeText('email', v)}  />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
+        <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <Button title="Save User" onPress={e => update_user()} />
+        <TextInput placeholder="password" onChangeText={v => handleChangeText('password', v)} />
+      </View>      
+      <View style={styles.inputgroup}>
+        <Button title="Update User" onPress={e => update_user()} />
+        <Button title="Delete User" onPress={e => delete_user()} />
       </View>
     </ScrollView>
   )

@@ -18,9 +18,9 @@ function Screens(){
   //el orden de importa ya que son como capas de navegacion
   return (
     <Stack.Navigator>
-      <Stack.Screen name="UserList" component={UserList} />
-      <Stack.Screen name="UserInsert" component={UserInsert} />
-      <Stack.Screen name="UserDetail" component={UserDetail} />
+      <Stack.Screen name="UserList" component={UserList} options={{title: "Users"}}/>
+      <Stack.Screen name="UserInsert" component={UserInsert} options={{title: "User Create"}} />
+      <Stack.Screen name="UserDetail" component={UserDetail} options={{title: "User Detail"}}/>
     </Stack.Navigator>
   )
 }

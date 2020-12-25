@@ -31,9 +31,9 @@ const UserInsert = (props)=>{
   const user_insert = () => {
     //db_init()
     //empty_user()
-    create_table()
+    //create_table()
     insert(state)
-    show_toast() 
+    //show_toast() 
     //selectall()
     props.navigation.navigate("UserList")
   }  

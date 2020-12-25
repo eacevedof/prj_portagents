@@ -32,7 +32,10 @@ const UserList = (props)=>{
             return (
               <ListItem key={user.id}>
                 <ListItem.Chevron />
-                <Avatar source={{uri: `https://randomuser.me/api/portraits/men/${user.id}.jpg`}}/>
+                <Avatar 
+                  source={{uri: `https://randomuser.me/api/portraits/men/${user.id}.jpg`}}
+                  rounded
+                  />
                 <ListItem.Content>
                   <ListItem.Title>{user.name}</ListItem.Title>
                   <ListItem.Subtitle>{user.email}</ListItem.Subtitle>

@@ -4,9 +4,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import {NavigationContainer, StackActions} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 
-import UserList from "./screens/UserList"
-import UserInsert from "./screens/UserInsert"
-import UserDetail from "./screens/UserDetail"
+import UserList from "./src/screens/UserList"
+import UserInsert from "./src/screens/UserInsert"
+import UserDetail from "./src/screens/UserDetail"
 
 //componente
 const Stack = createStackNavigator()

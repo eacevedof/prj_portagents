@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 
 import { StyleSheet, Button, TextInput, ScrollView, View, ToastAndroid, AlertIOS} from 'react-native'
 
-import IS from "../src/infrastructure/env"
-import {create_table, insert, remove, selectall, update, drop_table} from "../db"
+import IS from "../infrastructure/env"
+import {create_table, insert, remove, selectall, update, drop_table} from "../infrastructure/db"
 
 const db_init = ()=>{
   drop_table()
@@ -23,7 +23,7 @@ const user_insert = objuser=>{
 }
 
 const show_toast = ()=>{
-  const msg = "uuuuu"
+  const msg = "registro guardado"
   if(IS.ANDROID) ToastAndroid.show(msg, ToastAndroid.SHORT)
   if(IS.IOS) AlertIOS.alert(msg)
   if(IS.WEB) alert(msg)

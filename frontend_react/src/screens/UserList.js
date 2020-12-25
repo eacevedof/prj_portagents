@@ -14,8 +14,6 @@ const UserList = ()=>{
   }
 
   useEffect(()=>{
-    //if(typeof obj === "undefined") return
-    console.log("UUUUU EEEEFFF OOOOBBBJJ",obj)
     selectall(obj)
     return ()=> console.log("userlist.index unmounting",users)
   },[])

@@ -1,5 +1,5 @@
 import * as SQLite from 'expo-sqlite'
-import Filesystem from 'expo-file-system'
+import * as FileSystem from 'expo-file-system'
 import uuid from 'react-native-uuid'
 
 //https://docs.expo.io/versions/latest/sdk/sqlite/
@@ -48,7 +48,12 @@ const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={f
   db.transaction(fn_execute, trerror, trsuccess)
 }
 
-const get_location = ()=>Filesystem.getInfoAsync(`SQLite/${DB_NAME}`)
-
-console.log("db path",get_location())
+// esto da error pq filesystem no está disponible para web
+const get_location = async () => await FileSystem.getInfoAsync(`SQLite/${DB_NAME}`)
+//const get_location = () => FileSystem.documentDirectory 
+/*
+The method or property expo-file-system.getInfoAsync is not available on web, 
+are you sure you've linked all the native dependencies properly?
+*/
+//console.log("db path",get_location())
 export default executeobj

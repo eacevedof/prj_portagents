@@ -5,6 +5,7 @@ import {selectdetail, updatefn} from "../modules/base_user/repository"
 const UserDetail = (props)=>{
   
   const [user, set_user] = useState({})
+  const userid = props.route.params.userid
 
   const on_select = (tr, rs) => {
     const rows = Array.from(rs.rows)
@@ -18,7 +19,6 @@ const UserDetail = (props)=>{
 
   useEffect(()=>{
     console.log("userdetail.loaded")
-    userid = props.route.params.userid
     selectdetail(userid, on_select)
     return () => set_user([])
   },[props])

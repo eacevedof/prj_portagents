@@ -105,6 +105,13 @@ export const updatefn = (user, fnok, fnnok=null) => {
   executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
 }
 
+export const deletefn = (user, fnok, fnnok=null) => {
+  const sql = `
+  DELETE FROM base_user WHERE 1=1 AND id = ?
+  `
+  const args = [user.id]
+  executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
+}
 
 
 export const update = obj => {

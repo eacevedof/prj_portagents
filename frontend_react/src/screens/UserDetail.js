@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Button, TextInput, ScrollView, View} from 'react-native'
-import {selectdetail, updatefn} from "../modules/base_user/repository"
+import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator} from 'react-native'
+import {selectdetail, updatefn, deletefn} from "../modules/base_user/repository"
 
 const UserDetail = (props)=>{
   
+  const [isloading, set_isloading] = useState(true)
   const [user, set_user] = useState({})
   const userid = props.route.params.userid
 
@@ -11,6 +12,7 @@ const UserDetail = (props)=>{
     const rows = Array.from(rs.rows)
     console.table(rows)
     set_user({...rows[0]})
+    set_isloading(false)
   }
 
   const update_user = () => {
@@ -18,33 +20,51 @@ const UserDetail = (props)=>{
   }
 
   const delete_user = () => {
-    updatefn(user, ()=> alert("updated"))
+    deletefn(user, ()=> props.navigation.navigate("UserList",{isdeleted:true}))
   }
 
   useEffect(()=>{
+    set_isloading(true)
     console.log("userdetail.loaded")
     selectdetail(userid, on_select)
     return () => set_user([])
   },[props])
 
+
   const handleChangeText = (name, value) => {
     set_user({...user, [name]: value})
+  }
+
+  if(isloading){
+    return (
+      <View>
+        <ActivityIndicator size="large" color="#9e9e9e" />
+      </View>
+    )
   }
 
   return (
     <ScrollView style={styles.container} >
       <View style={styles.inputgroup} >
-        <TextInput placeholder="name" onChangeText={v => handleChangeText('name', v)} />
+        <TextInput placeholder="name" 
+          value={user.name}
+          onChangeText={v => handleChangeText('name', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="email" onChangeText={v => handleChangeText('email', v)}  />
+        <TextInput placeholder="email" 
+          value={user.email}
+          onChangeText={v => handleChangeText('email', v)}  />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)} />
+        <TextInput placeholder="phone" 
+          value={user.phone}
+          onChangeText={v => handleChangeText('phone', v)} />
       </View>
       <View style={styles.inputgroup}>
-        <TextInput placeholder="password" onChangeText={v => handleChangeText('password', v)} />
-      </View>      
+        <TextInput placeholder="password" 
+          value={user.password}
+          onChangeText={v => handleChangeText('password', v)} />
+      </View>
       <View style={styles.inputgroup}>
         <Button 
           color="#19AC52"

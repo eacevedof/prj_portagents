@@ -47,7 +47,7 @@ const UserDetail = (props)=>{
       </View>      
       <View style={styles.inputgroup}>
         <Button 
-          color="green"
+          color="#19AC52"
           title="Update User" onPress={e => update_user()} />
       </View>
       <View style={styles.inputgroup}>

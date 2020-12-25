@@ -110,11 +110,12 @@ export const updatefn = (user, fnok, fnnok=null) => {
   SET  name = ?,
   email = ?,
   phone = ?,
-  password = ?
+  password = ?,
+  update_date = ?
   WHERE 1=1
   AND id = ?
   `
-  const args = [user.name, user.email, user.phone, user.password, user.id]
+  const args = [user.name, user.email, user.phone, user.password, get_ymdhis(), user.id]
   executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
 }
 

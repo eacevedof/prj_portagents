@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 //import {useIsFocused} from "react-navigation/native"
 import { StyleSheet, Button, ScrollView } from 'react-native'
-import {selectallfn} from "../modules/base_user/repository"
+import {selectallfn,drop_table,create_table} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
 
 
@@ -21,6 +21,8 @@ const UserList = (props)=>{
   }
 
   useEffect(()=>{
+    //drop_table()
+    //create_table()
     console.log("userlist.loaded")
     selectallfn(on_select)
     return () => set_users([])

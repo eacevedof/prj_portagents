@@ -34,7 +34,7 @@ const UserDetail = (props)=>{
   return (
     <ScrollView style={styles.container} >
       <View style={styles.inputgroup} >
-        <TextInput placeholder="Name" onChangeText={v => handleChangeText('name', v)} />
+        <TextInput placeholder="name" onChangeText={v => handleChangeText('name', v)} />
       </View>
       <View style={styles.inputgroup}>
         <TextInput placeholder="email" onChangeText={v => handleChangeText('email', v)}  />
@@ -46,8 +46,15 @@ const UserDetail = (props)=>{
         <TextInput placeholder="password" onChangeText={v => handleChangeText('password', v)} />
       </View>      
       <View style={styles.inputgroup}>
-        <Button title="Update User" onPress={e => update_user()} />
-        <Button title="Delete User" onPress={e => delete_user()} />
+        <Button 
+          color="green"
+          title="Update User" onPress={e => update_user()} />
+      </View>
+      <View style={styles.inputgroup}>
+        <Button 
+          color="#E37399"
+          title="Delete User" onPress={e => delete_user()} 
+          />
       </View>
     </ScrollView>
   )

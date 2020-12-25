@@ -35,7 +35,20 @@ export const insert = obj => {
   //const fn_onsuccess = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.table(r.rows)}
   //query(sql,[],fn_loader)
   //alert("xxx")
-  executeobj({sql,args, fnsuccess:obj.fn})  
+  executeobj({sql, args, fnsuccess:obj.fn})  
+}
+
+export const insertfn = (user, fnok, fnnok=null) => {
+  const sql = `
+  INSERT INTO base_user 
+  (insert_date, uuid, name, email, phone, password) 
+  VALUES 
+  (?,?,?,?,?,?)
+  `
+  const date = get_ymdhis()
+  const uuid = get_uuid()
+  const args = [date, uuid, user.name, user.email, user.phone, user.password]
+  executeobj({sql, args, fnsuccess:fnok, fnerror:fnnok})  
 }
 
 export const selectall1 = () => {

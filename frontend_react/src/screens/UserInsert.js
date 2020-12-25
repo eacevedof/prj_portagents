@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Button, TextInput, ScrollView, View} from 'react-native'
-import {insert} from "../modules/base_user/repository"
+import {insertfn} from "../modules/base_user/repository"
 
 const UserInsert = (props)=>{
 
@@ -8,14 +8,8 @@ const UserInsert = (props)=>{
     name: '', email: '', phone: '', password: '1234'
   })
 
-  const user_insert = () => {
-    insert({
-      ...user,
-      //esto ha solucionado el error cant perfom react state update ona unmounted component
-      fn: ()=> props.navigation.navigate("UserList",{isnew:true})
-    })
-  }  
-
+  const user_insert = () => insertfn(user, ()=> props.navigation.navigate("UserList",{isnew:true}))
+  
   const handleChangeText = (name, value) => {
     set_user({...user, [name]: value})
   }

@@ -19,15 +19,16 @@ const UserList = (props)=>{
 
   const item_onpress = (userid) => props.navigation.navigate("UserDetail",{userid})
   
+
+
   useEffect(()=>{
     console.log("userlist.loaded")
-    let ismounted = true;
-
-    create_table()
     
-    if(ismounted) selectallfn(on_select)
-    console.log("userlist.end loaded")
-    return () => ismounted=false
+    //drop_table()
+    create_table()
+    selectallfn(on_select)
+
+    return () => console.log("unmount")
   },[props])
 
   if(isloading){
@@ -40,10 +41,18 @@ const UserList = (props)=>{
 
   return (
     <ScrollView>
-      <Button 
-        title="Insert" 
-        onPress={()=> props.navigation.navigate("UserInsert")} 
-      />
+      <View>
+        <Button 
+          title="Refresh" 
+          onPress={()=> selectallfn(on_select)} 
+        />
+      </View>
+      <View>
+        <Button 
+          title="Insert" 
+          onPress={()=> props.navigation.navigate("UserInsert")} 
+        />
+      </View>
       {
         users.map(user => {
             return (

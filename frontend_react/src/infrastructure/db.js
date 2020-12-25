@@ -1,4 +1,5 @@
 import * as SQLite from 'expo-sqlite'
+import Filesystem from 'expo-file-system'
 import uuid from 'react-native-uuid'
 
 //https://docs.expo.io/versions/latest/sdk/sqlite/
@@ -18,7 +19,10 @@ success (function) -- Called when the query is successfully completed during the
 error (function) -- Called if an error occured executing this particular query in the transaction. Takes two parameters: the transaction itself, and the error object.
 
 */
-const db = SQLite.openDatabase("portagent.db")
+
+const DB_NAME = "portagent.db"
+
+const db = SQLite.openDatabase(DB_NAME)
 
 export const get_uuid = () => uuid.v1()
 
@@ -44,5 +48,7 @@ const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={f
   db.transaction(fn_execute, trerror, trsuccess)
 }
 
+const get_location = ()=>Filesystem.getInfoAsync(`SQLite/${DB_NAME}`)
 
+console.log("db path",get_location())
 export default executeobj

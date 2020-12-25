@@ -68,8 +68,9 @@ export const empty_base_user = obj => {
 export const update = obj => {
   const sql = `
   UPDATE base_user 
-  SET uuid = ?
-  WHERE id LIKE ?
+  SET  = ?
+  WHERE 1=1
+  AND id LIKE ?
   `
   const args = ["uuu","%3"]
   //const fn_update = tx  => tx.executeSql(sql, arparam)

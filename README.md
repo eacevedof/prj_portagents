@@ -18,6 +18,7 @@
     ```
 - [npm install @react-navigation/stack](https://reactnavigation.org/docs/hello-react-navigation)
 - `npm i react-native-uuid`
+- `npm i expo-file-system`
 
 #### Analisis:
 - Servidor AWS

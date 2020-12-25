@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator, Text} from 'react-native'
+import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator, Text, Alert} from 'react-native'
 import {selectdetail, updatefn, deletefn} from "../modules/base_user/repository"
+import IS from "../infrastructure/env"
 
 const UserDetail = (props)=>{
   
@@ -16,11 +17,25 @@ const UserDetail = (props)=>{
   }
 
   const update_user = () => {
-    updatefn(user, ()=> alert("updated"))
+    updatefn(user, ()=> Alert.alert("updated"))
   }
 
   const delete_user = () => {
     deletefn(user, ()=> props.navigation.navigate("UserList",{isdeleted:true}))
+  }
+
+  const delete_confirm = () => {
+    //esto no se muestra en web
+    if(IS.WEB){
+      if(confirm(`Are you sure to remove user: ${user.uuid}`))
+        delete_user()
+    }
+    else{
+      Alert.alert(`Remove user: ${user.uuid}`, "Are you sure?", [
+        {text: "Yes", onPress: () => delete_user()},
+        {text: "No", onPress: () => console.log("cancelado")}
+      ])
+    }
   }
 
   useEffect(()=>{
@@ -76,7 +91,7 @@ const UserDetail = (props)=>{
       <View style={styles.inputgroup}>
         <Button 
           color="#E37399"
-          title="Delete User" onPress={e => delete_user()} 
+          title="Delete User" onPress={e => delete_confirm()} 
           />
       </View>
     </ScrollView>

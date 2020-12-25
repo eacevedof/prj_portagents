@@ -15,15 +15,6 @@ const db_init = ()=>{
 }
 
 
-const user_insert = objuser=>{
-  //db_init()
-  //empty_user()
-  create_table()
-  insert(objuser)
-  show_toast() 
-  selectall()
-}
-
 const show_toast = ()=>{
   const msg = "registro guardado"
   if(IS.ANDROID) ToastAndroid.show(msg, ToastAndroid.SHORT)
@@ -31,12 +22,21 @@ const show_toast = ()=>{
   if(IS.WEB) alert(msg)
 }
 
-const UserInsert = ()=>{
+const UserInsert = (props)=>{
 
   const [state, set_state] = useState({
     name: '', email: '', phone: '', password: '1234'
   })
 
+  const user_insert = () => {
+    //db_init()
+    //empty_user()
+    create_table()
+    insert(state)
+    show_toast() 
+    selectall()
+    props.navigation.navigate("UserList")
+  }  
 
   const handleChangeText = (name, value) => {
     set_state({...state, [name]: value})
@@ -54,7 +54,7 @@ const UserInsert = ()=>{
         <TextInput placeholder="phone" onChangeText={v => handleChangeText('phone', v)}/>
       </View>
       <View style={styles.inputgroup}>
-        <Button title="Save User" onPress={e => user_insert(state)} />
+        <Button title="Save User" onPress={e => user_insert()} />
       </View>
     </ScrollView>
   )

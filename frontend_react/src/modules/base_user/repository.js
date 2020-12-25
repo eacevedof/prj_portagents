@@ -14,6 +14,7 @@ export const create_table = ()=>{
   (
       id integer primary key not null, 
       insert_date text,
+      update_date text,
       uuid text,
       name text,
       email text,

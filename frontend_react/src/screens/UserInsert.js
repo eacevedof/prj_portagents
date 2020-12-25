@@ -1,26 +1,6 @@
 import React, {useState, useEffect} from 'react'
-
-import { StyleSheet, Button, TextInput, ScrollView, View, ToastAndroid, Alert} from 'react-native'
-
-import IS from "../infrastructure/env"
-import {create_table, insert, drop_table} from "../modules/base_user/repository"
-
-const db_init = ()=>{
-  drop_table()
-  create_table()
-  //insert()
-  //remove()
-  //update()
-  //selectall()
-}
-
-
-const show_toast = ()=>{
-  const msg = "registro guardado"
-  if(IS.ANDROID) ToastAndroid.show(msg, ToastAndroid.SHORT)
-  if(IS.IOS) Alert.alert(msg)
-  if(IS.WEB) console.log(msg)
-}
+import { StyleSheet, Button, TextInput, ScrollView, View} from 'react-native'
+import {insert} from "../modules/base_user/repository"
 
 const UserInsert = (props)=>{
 
@@ -29,12 +9,7 @@ const UserInsert = (props)=>{
   })
 
   const user_insert = () => {
-    //db_init()
-    //empty_user()
-    //create_table()
-    //insert(user)
-    //show_toast() 
-    //selectall()
+    insert({...user})
     props.navigation.navigate("UserList")
   }  
 

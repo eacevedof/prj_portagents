@@ -17,7 +17,8 @@ const UserList = (props)=>{
   }
 
   useEffect(()=>{
-    //selectall(obj)
+    console.log("userlist.loaded")
+    selectall(obj)
     return ()=> set_users([])
   },[])
 

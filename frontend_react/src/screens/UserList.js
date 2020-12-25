@@ -10,12 +10,16 @@ const UserList = (props)=>{
 
   const obj = {
     fn: (tr, r)=>{
-      set_users(Array.from(r.rows))
+      const rows = Array.from(r.rows)
+      //rows.forEach(o => console.log(o))
+      set_users(rows)
+      //console.log("UUUUUSSSS",rows[0],rows)
     }  
   }
 
   useEffect(()=>{
     selectall(obj)
+    
     return ()=> console.log("userlist.index unmounting")
   },[])
 

@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { StyleSheet, Button, TextInput, ScrollView, View, ToastAndroid, Alert} from 'react-native'
 
 import IS from "../infrastructure/env"
-import {create_table, insert, selectall, drop_table} from "../modules/base_user/repository"
+import {create_table, insert, drop_table} from "../modules/base_user/repository"
 
 const db_init = ()=>{
   drop_table()
@@ -24,7 +24,7 @@ const show_toast = ()=>{
 
 const UserInsert = (props)=>{
 
-  const [state, set_state] = useState({
+  const [user, set_user] = useState({
     name: '', email: '', phone: '', password: '1234'
   })
 
@@ -32,15 +32,20 @@ const UserInsert = (props)=>{
     //db_init()
     //empty_user()
     //create_table()
-    insert(state)
+    //insert(user)
     //show_toast() 
     //selectall()
     props.navigation.navigate("UserList")
   }  
 
   const handleChangeText = (name, value) => {
-    set_state({...state, [name]: value})
+    set_user({...user, [name]: value})
   }
+
+  useEffect(()=>{
+    console.log("insert loaded")
+    return ()=> set_user({})
+  },[])
 
   return (
     <ScrollView style={styles.container} >

@@ -6,7 +6,7 @@ import {ListItem, Avatar} from "react-native-elements"
 
 const UserList = (props)=>{
 
-  const [users, set_users] = useState([{id:-1,name:"uuu 1"},{id:-2,name:"uuu 2"},])
+  const [users, set_users] = useState([])
 
   const obj = {
     fn: (tr, r)=>{
@@ -17,9 +17,11 @@ const UserList = (props)=>{
   }
 
   useEffect(()=>{
-    selectall(obj)
-    return ()=> console.log("userlist.index unmounting")
+    //selectall(obj)
+    return ()=> set_users([])
   },[])
+
+  //if(!users) return null
 
   return (
     <ScrollView>
@@ -37,7 +39,7 @@ const UserList = (props)=>{
                   rounded
                   />
                 <ListItem.Content>
-                  <ListItem.Title>{user.name}</ListItem.Title>
+                  <ListItem.Title>{user.id} - {user.name}</ListItem.Title>
                   <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>

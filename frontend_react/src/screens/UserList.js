@@ -17,9 +17,8 @@ const UserList = (props)=>{
   }
 
   useEffect(()=>{
-    //selectall(obj)
-    console.log(users)
-    //return ()=> console.log("userlist.index unmounting")
+    selectall(obj)
+    return ()=> console.log("userlist.index unmounting")
   },[])
 
   return (
@@ -33,8 +32,10 @@ const UserList = (props)=>{
             return (
               <ListItem key={user.id}>
                 <ListItem.Chevron />
+                <Avatar source={{uri: `https://randomuser.me/api/portraits/men/${user.id}.jpg`}}/>
                 <ListItem.Content>
-                  <ListItem.Title>user.name</ListItem.Title>
+                  <ListItem.Title>{user.name}</ListItem.Title>
+                  <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>
             )

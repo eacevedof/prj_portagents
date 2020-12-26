@@ -10,7 +10,11 @@ const UserDetail = (props)=>{
   const userid = props.route.params.userid
 
   const on_select = (tr, rs) => {
-    const rows = Array.from(rs.rows)
+    console.log("list on select")
+    let rows = []
+    if(IS.WEB) rows = Array.from(rs.rows)
+    else rows = rs.rows._array
+    
     set_user({...rows[0]})
     set_isloading(false)
   }

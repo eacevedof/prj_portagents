@@ -76,6 +76,7 @@ const UserDetail = (props)=>{
       </View>
       <View style={styles.inputgroup} >
         <TextInput placeholder="name" 
+          selectTextOnFocus
           ref={txtname}
           value={user.name}
           onChangeText={v => input_onchange('name', v)} />

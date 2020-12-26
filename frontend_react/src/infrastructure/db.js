@@ -36,9 +36,34 @@ export const get_uuid = () => {
 
 }
 
+const get_rnd = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+export const get_uuid4 = () => {
+  const maxlength = 14
+  
+  const ar = [
+    "abcdefghijklmnopqrstuvxyz",
+    "0123456789"
+  ]
+
+  const r = new Array(maxlength).fill(0).map(()=>{
+    let i = get_rnd(0,1)
+    let str = ar[i]
+    str = get_rnd(0,1) ? str.toUpperCase() : str 
+    const max = str.length - 1 
+    i = get_rnd(0, max)
+    return str.split("")[i]
+  }).join("")
+
+  return r
+}
+
 export const get_ymdhis = () => (new Date()).toISOString().replace(/T/,' ').replace(/\..+/,'')
 
 const execute = (sql, params=[], fn_onerror=null, fn_onsuccess=null) => {
+  
   //los parametros mejor en un objeto y hacer {a,b} = obj
   const fn_execute = tx => tx.executeSql(sql, params)
   db.transaction(fn_execute, fn_onerror, fn_onsuccess)
@@ -51,6 +76,7 @@ const query = (sql, params=[], fn_onload, fn_onerror, fn_onsuccess) => {
 }
 
 const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
+  
   const {sql, args, fnsuccess, fnerror} = objex
   const {trsuccess, trerror} = objtr
 

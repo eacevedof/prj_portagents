@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Button, ScrollView, ActivityIndicator } from 'react-native'
 import {selectallfn,drop_table,create_table} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
+import {got_to} from "../infrastructure/wrapper"
 import IS from "../infrastructure/env"
 
 
@@ -20,7 +21,7 @@ const UserList = (props)=>{
     set_isloading(false)
   }
 
-  const item_onpress = (userid) => props.navigation.navigate("UserDetail",{userid})
+  const item_onpress = userid => got_to(props, "UserDetail", {userid})
   
   useEffect(()=>{
     console.log("userlist.loaded")
@@ -51,7 +52,7 @@ const UserList = (props)=>{
       <View>
         <Button 
           title="Insert" 
-          onPress={()=> props.navigation.navigate("UserInsert")} 
+          onPress={()=> got_to(props, "UserInsert")} 
         />
       </View>
       {
@@ -64,7 +65,8 @@ const UserList = (props)=>{
                   rounded
                   />
                 <ListItem.Content>
-                  <ListItem.Title>{user.id} - {user.name}</ListItem.Title>
+                  <ListItem.Title>{user.id} - {user.uuid}</ListItem.Title>
+                  <ListItem.Subtitle>{user.name}</ListItem.Subtitle>
                   <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
                 </ListItem.Content>
               </ListItem>

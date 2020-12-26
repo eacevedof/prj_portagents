@@ -1,13 +1,15 @@
 import React, {useState, useEffect, useRef} from "react"
 import { StyleSheet, Button, TextInput, ScrollView, View} from "react-native"
 import {insertfn} from "../modules/base_user/repository"
+import {got_to, go_to} from "../infrastructure/wrapper"
+import usermodel from "../modules/base_user/user_model"
 
 const UserInsert = (props)=>{
 
   const txtname = useRef(null)
   const [issaved, set_issaved] = useState(false)
   
-  const [user, set_user] = useState({})
+  const [user, set_user] = useState({...usermodel})
 
   const user_insert = () => insertfn(user, ()=>set_issaved(true), (e)=>console.log("insert error",e))
   //const user_insert = () => insertfn(user, ()=> props.navigation.navigate("UserList",{isnew:true}))
@@ -19,7 +21,9 @@ const UserInsert = (props)=>{
   useEffect(()=>{
     console.log("insert loaded",issaved)
     //esto es lo que provoca el error, el ir al componente que no está descargado
-    if(issaved) props.navigation.navigate("UserList",{isnew:true})
+    if(issaved) 
+      got_to(props,"UserList",{isnew:true})
+
     txtname.current.focus()
     return () => set_user({})
   },[issaved])

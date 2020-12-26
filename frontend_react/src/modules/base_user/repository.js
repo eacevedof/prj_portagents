@@ -1,4 +1,4 @@
-import executeobj, {get_uuid, get_ymdhis} from "../../infrastructure/db"
+import executeobj, {get_uuid4, get_ymdhis} from "../../infrastructure/db"
 
 export const drop_table = () =>{
     const sql = `
@@ -32,7 +32,7 @@ export const create_table = ()=>{
 export const insert = obj => {
   const sql = "INSERT INTO base_user (insert_date, uuid, name, email, phone, password) VALUES (?,?,?,?,?,?)"
   const date = get_ymdhis()
-  const uuid = get_uuid()
+  const uuid = get_uuid4()
   const args = [date, uuid, obj.name, obj.email, obj.phone, obj.password]
   //execute(sql, arparam,e=>console.log("e.insert",e))
   //const fn_onsuccess = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.log(r.rows)}
@@ -50,7 +50,7 @@ export const insertfn = (user, fnok, fnnok=null) => {
   `
 
   const date = get_ymdhis()
-  const uuid = get_uuid()
+  const uuid = get_uuid4()
   const args = [date, uuid, user.name, user.email, user.phone, user.password]
 
   console.log(sql, args)

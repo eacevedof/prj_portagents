@@ -22,8 +22,6 @@ const UserList = (props)=>{
 
   const item_onpress = (userid) => props.navigation.navigate("UserDetail",{userid})
   
-
-
   useEffect(()=>{
     console.log("userlist.loaded")
     

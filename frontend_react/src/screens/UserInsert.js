@@ -23,7 +23,7 @@ const UserInsert = (props)=>{
   useEffect(()=>{
     console.log("insert loaded",issaved)
     //esto es lo que provoca el error, el ir al componente que no está descargado
-    //if(issaved) props.navigation.navigate("UserList",{isnew:true})
+    if(issaved) props.navigation.navigate("UserList",{isnew:true})
     return () => set_user({})
   },[issaved])
 

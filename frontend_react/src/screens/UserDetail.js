@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import { StyleSheet, Button, TextInput, ScrollView, View, ActivityIndicator, Text, Alert} from 'react-native'
 import {selectdetail, updatefn, deletefn} from "../modules/base_user/repository"
 import IS from "../infrastructure/env"
 
 const UserDetail = (props)=>{
   
+  const txtname = useRef(null)
   const [isloading, set_isloading] = useState(true)
   const [user, set_user] = useState({})
   const userid = props.route.params.userid
@@ -17,6 +18,12 @@ const UserDetail = (props)=>{
     
     set_user({...rows[0]})
     set_isloading(false)
+    //lo tengo que poner aqui, pq si está cargando txtname no existe pq
+    //no se ha renderizado
+
+    txtname.current.focus()
+    if(IS.WEB)
+      txtname.current.select()
   }
 
   const update_user = () => {
@@ -46,7 +53,7 @@ const UserDetail = (props)=>{
     set_isloading(true)
     console.log("userdetail.loaded")
     selectdetail(userid, on_select)
-    return () => set_user([])
+    return () => set_user({})
   },[props])
 
 
@@ -69,6 +76,7 @@ const UserDetail = (props)=>{
       </View>
       <View style={styles.inputgroup} >
         <TextInput placeholder="name" 
+          ref={txtname}
           value={user.name}
           onChangeText={v => input_onchange('name', v)} />
       </View>

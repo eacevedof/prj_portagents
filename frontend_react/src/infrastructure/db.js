@@ -43,35 +43,24 @@ const DB_NAME = "portagent.db"
 
 const db = SQLite.openDatabase(DB_NAME)
 
-export const get_uuid = () => {
-  var result, i, j;
-  result = '';
-  for(j=0; j<32; j++) {
-    if( j == 8 || j == 12 || j == 16 || j == 20)
-      result = result + '-';
-    i = Math.floor(Math.random()*16).toString(16).toUpperCase();
-    result = result + i;
-  }
-  return result
+const get_rnd = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
-}
-
-const get_rnd = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-export const get_uuid4 = () => {
-  const maxlength = 14
-  
+export const get_uuid = (length=14) => {
+   
   const ar = [
-    "abcdefghijklmnopqrstuvxyz",
-    "0123456789"
+    "abcdefghijklmnopqrstuvxyz", //0: letra
+    "0123456789"                 //1: numero
   ]
 
-  const r = new Array(maxlength).fill(0).map(()=>{
+  const r = new Array(length).fill(0).map(()=>{
+    //indica de modo aleatorio si se usará letras o números
     let i = get_rnd(0,1)
+    //si i=0 => letras, sino (i=1) numeros
     let str = ar[i]
+    //si es 1 se pasará a mayusculas el string obtenido, evidentemente para los números
+    //no hay mayor efecto
     str = get_rnd(0,1) ? str.toUpperCase() : str 
+    //se obtendrá un valor entre 0 y la longitud del string anterior 10 o 25
     const max = str.length - 1 
     i = get_rnd(0, max)
     return str.split("")[i]

@@ -43,13 +43,14 @@ const DB_NAME = "portagent.db"
 
 const db = SQLite.openDatabase(DB_NAME)
 
+//función que devuelve un número aleatorio entre min y max ambos inclusive
 const get_rnd = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
 export const get_uuid = (length=14) => {
    
   const ar = [
-    "abcdefghijklmnopqrstuvxyz", //0: letra
-    "0123456789"                 //1: numero
+    "abcdefghijklmnopqrstuvxyz", //0: letras
+    "0123456789"                 //1: números
   ]
 
   const r = new Array(length).fill(0).map(()=>{

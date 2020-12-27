@@ -17,7 +17,8 @@ error (function)
 success (function) 
   -- Called when the transaction has completed executing on the database.
 
-
+==========================================================================================================
+==========================================================================================================
 Enqueue a SQL statement to execute in the transaction. Authors are strongly recommended to make use of the ? placeholder 
 feature of the method to avoid against SQL injection attacks, and to never construct SQL statements on the fly.
 

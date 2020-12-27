@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from "react"
 import { StyleSheet, Button, TextInput, ScrollView, View} from "react-native"
 import {insertfn} from "../modules/base_user/repository"
-import {got_to, go_to} from "../infrastructure/wrapper"
+import {goto} from "../infrastructure/wrapper"
 import usermodel from "../modules/base_user/user_model"
 
 const UserInsert = (props)=>{
@@ -22,7 +22,7 @@ const UserInsert = (props)=>{
     console.log("insert loaded",issaved)
     //esto es lo que provoca el error, el ir al componente que no está descargado
     if(issaved) 
-      got_to(props,"UserList",{isnew:true})
+      goto(props,"UserList",{isnew:true})
 
     txtname.current.focus()
     return () => set_user({})

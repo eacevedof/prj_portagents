@@ -75,13 +75,13 @@ const query = (sql, params=[], fn_onload, fn_onerror, fn_onsuccess) => {
   db.transaction(fn_query, fn_onerror, fn_onsuccess)
 }
 
-const executeobj = (objex={sql:"",args:[],fnsuccess:null,fnerror:null}, objtr={fnsuccess:null,fnerror:null} ) => {
+const executeobj = (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:null,fn_nok:null} ) => {
   
-  const {sql, args, fnsuccess, fnerror} = objex
-  const {trsuccess, trerror} = objtr
+  const {sql, args, fn_ok, fn_nok} = objex
+  const {fn_trok, fn_trnok} = objtr
 
-  const fn_execute = tx => tx.executeSql(sql, args, fnsuccess, fnerror)
-  db.transaction(fn_execute, trerror, trsuccess)
+  const fn_execute = tx => tx.executeSql(sql, args, fn_ok, fn_nok)
+  db.transaction(fn_execute, fn_trnok, fn_trok)
 }
 
 // esto da error pq filesystem no está disponible para web

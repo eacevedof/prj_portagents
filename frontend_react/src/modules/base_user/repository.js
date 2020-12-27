@@ -5,8 +5,8 @@ export const drop_table = () =>{
     DROP TABLE IF EXISTS base_user;
     `
     console.log(sql)
-    const fn_onsuccess = (objtr, r) => {console.log("drop_table: objtr",objtr,"resulset"); console.log(r.rows)}
-    executeobj({sql, fnsuccess:fn_onsuccess})
+    const fn_ok = (objtr, r) => {console.log("drop_table: objtr",objtr,"resulset"); console.log(r.rows)}
+    executeobj({sql, fn_ok:fn_ok})
   }
   
 export const create_table = ()=>{
@@ -25,8 +25,8 @@ export const create_table = ()=>{
   `
   console.log(sql)
   //execute(sql)
-  const fn_onsuccess = (objtr, r) => {console.log("create_table: objtr",objtr,"resulset",r); console.log(r.rows)}
-  executeobj({sql, fnsuccess:fn_onsuccess})
+  const fn_ok = (objtr, r) => {console.log("create_table: objtr",objtr,"resulset",r); console.log(r.rows)}
+  executeobj({sql, fn_ok:fn_ok})
 }
 
 export const insert = obj => {
@@ -35,10 +35,10 @@ export const insert = obj => {
   const uuid = get_uuid4()
   const args = [date, uuid, obj.name, obj.email, obj.phone, obj.password]
   //execute(sql, arparam,e=>console.log("e.insert",e))
-  //const fn_onsuccess = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.log(r.rows)}
+  //const fn_ok = (objtr, r) => {console.log("insert.success: objtr",objtr,"resulset",r); console.log(r.rows)}
   //query(sql,[],fn_loader)
   //alert("xxx")
-  executeobj({sql, args, fnsuccess:obj.fn})  
+  executeobj({sql, args, fn_ok:obj.fn})  
 }
 
 export const insertfn = (user, fnok, fnnok=null) => {
@@ -54,23 +54,23 @@ export const insertfn = (user, fnok, fnnok=null) => {
   const args = [date, uuid, user.name, user.email, user.phone, user.password]
 
   console.log(sql, args)
-  executeobj({sql, args, fnsuccess:fnok, fnerror:fnnok})  
+  executeobj({sql, args, fn_ok:fnok, fn_nok:fnnok})  
 }
 
 export const selectall1 = () => {
   const sql = `
   SELECT * FROM base_user ORDER BY id DESC
   `
-  const fn_onsuccess = (objtr, r) => {console.log("selectall1.success: objtr",objtr,"resulset",r); console.log(r.rows)}
+  const fn_ok = (objtr, r) => {console.log("selectall1.success: objtr",objtr,"resulset",r); console.log(r.rows)}
   //query(sql,[],fn_loader)
-  executeobj({sql, fnsuccess: fn_onsuccess})
+  executeobj({sql, fn_ok: fn_ok})
 }
 
 export const selectall = (obj) => {
   const sql = `
   SELECT * FROM base_user ORDER BY id DESC
   `
-  executeobj({sql, fnsuccess: obj.fn})
+  executeobj({sql, fn_ok: obj.fn})
 }
 
 export const selectallfn = (fnok, fnnok=null) => {
@@ -78,7 +78,7 @@ export const selectallfn = (fnok, fnnok=null) => {
   SELECT * FROM base_user ORDER BY id DESC
   `
   console.log(sql)
-  executeobj({sql, fnsuccess: fnok, fnerror: fnnok})
+  executeobj({sql, fn_ok: fnok, fn_nok: fnnok})
 }
 
 
@@ -91,7 +91,7 @@ export const selectdetail = (id, fnok, fnnok=null) => {
   `
   const args = [id]
   console.log(sql, args)
-  executeobj({sql, args, fnsuccess: fnok, fnerror: fnnok})
+  executeobj({sql, args, fn_ok: fnok, fn_nok: fnnok})
 }
 
 export const remove = obj => {
@@ -99,8 +99,8 @@ export const remove = obj => {
   DELETE FROM base_user WHERE id = ?
   `
   const args = [2]
-  const fn_onsuccess = (objtr, r) => {console.log("remove.success: objtr",objtr,"resulset",r); console.log(r.rows)}
-  executeobj({sql, args, fnsuccess:fn_onsuccess})
+  const fn_ok = (objtr, r) => {console.log("remove.success: objtr",objtr,"resulset",r); console.log(r.rows)}
+  executeobj({sql, args, fn_ok:fn_ok})
 }
 
 export const empty_base_user = obj => {
@@ -108,8 +108,8 @@ export const empty_base_user = obj => {
   DELETE FROM base_user WHERE 1
   `
   const args = []
-  const fn_onsuccess = (objtr, r) => {console.log("remove.success: objtr",objtr,"resulset",r); console.log(r.rows)}
-  executeobj({sql, args, fnsuccess:fn_onsuccess})  
+  const fn_ok = (objtr, r) => {console.log("remove.success: objtr",objtr,"resulset",r); console.log(r.rows)}
+  executeobj({sql, args, fn_ok:fn_ok})  
 }
 
 export const updatefn = (user, fnok, fnnok=null) => {
@@ -125,7 +125,7 @@ export const updatefn = (user, fnok, fnnok=null) => {
   `
   const args = [user.name, user.email, user.phone, user.password, get_ymdhis(), user.id]
   console.log(sql, args)
-  executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
+  executeobj({sql, args, fn_ok:fnok, fn_nok: fnnok})
 }
 
 export const deletefn = (user, fnok, fnnok=null) => {
@@ -134,7 +134,7 @@ export const deletefn = (user, fnok, fnnok=null) => {
   `
   const args = [user.id]
   console.log(sql, args)
-  executeobj({sql, args, fnsuccess:fnok, fnerror: fnok})
+  executeobj({sql, args, fn_ok:fnok, fn_nok: fnnok})
 }
 
 
@@ -149,6 +149,6 @@ export const update = obj => {
   //const fn_update = tx  => tx.executeSql(sql, arparam)
   //db.transaction(fn_update, e=>console.log("update error",e), ()=>console.log("update", sql, arparam))
   //execute(sql, arparam)
-  const fn_onsuccess = (objtr, r) => {console.log("update.success: objtr",objtr,"resulset",r); console.log(r.rows)}
-  executeobj({sql, args, fnsuccess:fn_onsuccess})
+  const fn_ok = (objtr, r) => {console.log("update.success: objtr",objtr,"resulset",r); console.log(r.rows)}
+  executeobj({sql, args, fn_ok:fn_ok})
 }

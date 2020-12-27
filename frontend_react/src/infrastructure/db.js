@@ -1,23 +1,42 @@
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
 
-//https://docs.expo.io/versions/latest/sdk/sqlite/
 /**
-db.transaction(callback, error, success)Execute a database transaction.
+https://docs.expo.io/versions/latest/sdk/sqlite/
+
+Execute a database transaction.
+
+db.transaction(callback, error, success)
+
 Parameters
-callback (function) -- A function representing the transaction to perform. Takes a Transaction (see below) as its only parameter, on which it can add SQL statements to execute.
-error (function) -- Called if an error occured processing this transaction. Takes a single parameter describing the error.
-success (function) -- Called when the transaction has completed executing on the database.
+callback (function) 
+  -- A function representing the transaction to perform. Takes a Transaction (see below) as its only parameter, on which it can 
+  add SQL statements to execute.
+error (function) 
+  -- Called if an error occured processing this transaction. Takes a single parameter describing the error.
+success (function) 
+  -- Called when the transaction has completed executing on the database.
 
 
-tx.executeSql(sqlStatement, arguments, success, error)Enqueue a SQL statement to execute in the transaction. Authors are strongly recommended to make use of the ? placeholder feature of the method to avoid against SQL injection attacks, and to never construct SQL statements on the fly.
+Enqueue a SQL statement to execute in the transaction. Authors are strongly recommended to make use of the ? placeholder 
+feature of the method to avoid against SQL injection attacks, and to never construct SQL statements on the fly.
+
+tx.executeSql(sqlStatement, arguments, success, error)
+
 Parameters
-sqlStatement (string) -- A string containing a database query to execute expressed as SQL. The string may contain ? placeholders, with values to be substituted listed in the arguments parameter.
-arguments (array) -- An array of values (numbers or strings) to substitute for ? placeholders in the SQL statement.
-success (function) -- Called when the query is successfully completed during the transaction. Takes two parameters: the transaction itself, and a ResultSet object (see below) with the results of the query.
-error (function) -- Called if an error occured executing this particular query in the transaction. Takes two parameters: the transaction itself, and the error object.
+sqlStatement (string) 
+  -- A string containing a database query to execute expressed as SQL. The string may contain ? placeholders, with values to be 
+  substituted listed in the arguments parameter.
+arguments (array) 
+  -- An array of values (numbers or strings) to substitute for ? placeholders in the SQL statement.
+success (function) 
+  -- Called when the query is successfully completed during the transaction. Takes two parameters: the transaction itself, and a 
+  ResultSet object (see below) with the results of the query.
+error (function) 
+  -- Called if an error occured executing this particular query in the transaction. Takes two parameters: the transaction itself, 
+  and the error object.
 
-*/
+**/
 
 const DB_NAME = "portagent.db"
 

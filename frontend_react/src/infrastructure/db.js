@@ -37,6 +37,7 @@ error (function)
   -- Called if an error occured executing this particular query in the transaction. Takes two parameters: the transaction itself, 
   and the error object.
 
+  https://zellwk.com/blog/converting-callbacks-to-promises/
 **/
 
 const DB_NAME = "portagent.db"

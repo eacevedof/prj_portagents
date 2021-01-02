@@ -95,6 +95,26 @@ const executeobj = (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:
   db.transaction(fn_execute, fn_trnok, fn_trok)
 }
 
+
+const tr_prom = (fn) => new Promise((resolve, reject) => {
+  db.transaction(fn, error => reject(error), ok => resolve(ok) )
+})
+
+
+const exce_prom = (sql, args) => new Promise((resolve, reject)=>{
+  tx.executeSql(sql, args, error => reject(error), ok => resolve(ok))
+}) 
+
+export const queryeobj = (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:null,fn_nok:null} ) => {
+  
+  //test
+  const {sql, args, fn_ok, fn_nok} = objex
+  const {fn_trok, fn_trnok} = objtr
+
+  
+  
+}
+
 // esto da error pq filesystem no está disponible para web
 const get_location = async () => await FileSystem.getInfoAsync(`SQLite/${DB_NAME}`)
 //const get_location = () => FileSystem.documentDirectory 

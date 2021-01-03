@@ -27,7 +27,7 @@ const UserList = (props)=>{
     console.log("userlist.loaded")
     
     //drop_table()
-    get_ids()
+    //get_ids() da error
     create_table()
     selectallfn(on_select)
 

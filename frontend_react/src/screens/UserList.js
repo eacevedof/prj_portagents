@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 //import {useIsFocused} from "react-navigation/native"
 import { StyleSheet, View, Button, ScrollView, ActivityIndicator } from 'react-native'
-import {selectallfn,drop_table,create_table} from "../modules/base_user/repository"
+import {selectallfn,drop_table,create_table, get_ids} from "../modules/base_user/repository"
 import {ListItem, Avatar} from "react-native-elements"
 import {goto} from "../infrastructure/wrapper"
 import IS from "../infrastructure/env"
@@ -27,6 +27,7 @@ const UserList = (props)=>{
     console.log("userlist.loaded")
     
     //drop_table()
+    get_ids()
     create_table()
     selectallfn(on_select)
 

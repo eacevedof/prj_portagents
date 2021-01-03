@@ -1,4 +1,4 @@
-import executeobj, {get_uuid, get_ymdhis} from "../../infrastructure/db"
+import executeobj, {get_uuid, get_ymdhis, queryobj} from "../../infrastructure/db"
 
 export const drop_table = () =>{
     const sql = `
@@ -72,6 +72,15 @@ export const selectall = (obj) => {
   `
   executeobj({sql, fn_ok: obj.fn})
 }
+
+export const get_ids = async()=>{
+  const sql = `
+  SELECT * FROM base_user ORDER BY id DESC
+  `
+  r = await queryobj({sql})
+  console.log("get_ids:",r)
+}
+
 
 export const selectallfn = (fnok, fnnok=null) => {
   const sql = `

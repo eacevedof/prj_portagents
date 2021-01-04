@@ -77,7 +77,7 @@ export const get_ids = async()=>{
   const sql = `
   SELECT * FROM base_user ORDER BY id DESC
   `
-  const r = await queryobj({sql})
+  const r = await queryobj({sql, args:[]})
   console.log("get_ids:",r)
 }
 

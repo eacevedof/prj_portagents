@@ -96,24 +96,14 @@ const executeobj = (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:
 }
 
 
-const tr_prom = (fn) => new Promise((resolve, reject) => {
-  db.transaction(fn, error => reject(error), ok => resolve(ok) )
-})
 
 
-const exce_prom = (sql, args) => new Promise((resolve, reject)=>{
-  tx.executeSql(sql, args, error => reject(error), ok => resolve(ok))
-}) 
-
-export const queryobj = async (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:null,fn_nok:null} ) => {
+export const queryobj = async (objex={sql:"", args:[]}) => {
   
-  const {sql, args, fn_ok, fn_nok} = objex
-  const {fn_trok, fn_trnok} = objtr
+  const fn_exec = tx => new Promise((resolve, reject) => tx.executeSql(objex.sql, objex.args, error => reject(error), ok => resolve(ok))) 
+  const fn_trans = fn_exec => new Promise((resolve, reject) => db.transaction(fn_exec, error => reject(error), ok => resolve(ok)) )
 
-  const r = await exce_prom(sql, args)
-  return r 
-  //const fn_execute = tx => tx.executeSql(sql, args, fn_ok, fn_nok)
-  //db.transaction(fn_execute, fn_trnok, fn_trok)
+  return fn_trans(fn_exec)
 }
 
 

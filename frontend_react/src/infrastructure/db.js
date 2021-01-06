@@ -98,7 +98,7 @@ const executeobj = (objex={sql:"",args:[],fn_ok:null,fn_nok:null}, objtr={fn_ok:
 
 
 
-export const queryobj = async (objex={sql:"", args:[]}) => {
+export const queryobj_old = async (objex={sql:"", args:[]}) => {
   //https://stackoverflow.com/questions/32454049/javascript-promises-in-sql-transaction
   //no puedo quitar la promesa pq entonces me obliga a definir un resolve y un reject
   const fn_exec1 = tx => new Promise((resolve, reject) => tx.executeSql(objex.sql, objex.args, error => reject(error), ok => resolve(ok))) 
@@ -111,6 +111,17 @@ export const queryobj = async (objex={sql:"", args:[]}) => {
   const fn_trans = fn_exec => new Promise((resolve, reject) => db.transaction(fn_exec, error => reject(error), ok => resolve(ok)) )
 
   return fn_trans(fn_exec)
+}
+
+export const queryobj = sql => {
+  return new Promise((prom_ok, prom_error)=>{
+    db.transaction( tx => {
+      tx.executeSql(sql,[],(tx, result)=>{
+        console.log("SQL:",sql,"RESULT",result)
+        prom_ok(result)
+      })//tx.excecutesql
+    })//db.transaction
+  })//promise
 }
 
 

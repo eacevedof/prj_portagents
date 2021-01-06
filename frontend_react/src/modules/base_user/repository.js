@@ -77,9 +77,20 @@ export const get_ids = async()=>{
   const sql = `
   SELECT * FROM base_user ORDER BY id DESC
   `
+  //console.log(sql)
   //const r = await queryobj({sql, args:[]})
-  const r = await queryobj(sql)
-  console.log("get_ids:",r.rows)
+  try {
+    const r = await queryobj(sql)
+    const ar = Object.keys(r.rows).map(k => r.rows[k])
+    console.log("ROOOOWWWWSSS",ar.filter( item => item.id>10))
+    //r.rows.map( item => console.log(item))
+    //console.log()
+    return r.rows
+  } 
+  catch (error) {
+    return error
+  }
+  
 }
 
 

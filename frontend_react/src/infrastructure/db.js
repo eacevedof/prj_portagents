@@ -116,8 +116,10 @@ export const queryobj_old = async (objex={sql:"", args:[]}) => {
 export const queryobj = sql => {
   return new Promise((prom_ok, prom_error)=>{
     db.transaction( tx => {
-      tx.executeSql(sql,[],(tx, result)=>{
-        console.log("SQL:",sql,"RESULT",result)
+      tx.executeSql(sql,[], (tx, result)=>{
+        
+        //const ar = Object.keys(result.rows).map(k => result.rows[k] );
+        
         prom_ok(result)
       })//tx.excecutesql
     })//db.transaction

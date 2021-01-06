@@ -13,6 +13,9 @@ const UserList = (props)=>{
   const [users, set_users] = useState([])
 
   const on_select = (tr, rs) => {
+    const r = get_ids()
+    console.log("RRRR",r)
+
     console.log("list on select")
     let rows = []
     if(IS.WEB) rows = Array.from(rs.rows)
@@ -27,7 +30,6 @@ const UserList = (props)=>{
     console.log("userlist.loaded")
     
     //drop_table()
-    const r = get_ids()
     create_table()
     selectallfn(on_select)
 
